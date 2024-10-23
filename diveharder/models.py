@@ -25,7 +25,7 @@ class Statistics(BaseModel):
     deaths: int
     revives: int
     friendlies: int
-    mission_success_rate: int = Field(alias="missionSuccessRate")
+    mission_success_rate: float = Field(alias="missionSuccessRate")
     accuracy: int
     player_count: int = Field(alias="playerCount")
 
@@ -74,6 +74,14 @@ class PlanetEvent(BaseModel):
     end_time: datetime = Field(alias="endTime")
     campaign_id: int = Field(alias="campaignId")
     joint_operation_ids: list[int] = Field(alias="jointOperationIds")
+
+    @property
+    def planet(self) -> "Planet | None":
+        from diveharder import ApiClient
+
+        if ApiClient._instance:
+            return ApiClient._instance.planets.get_planet(self.campaign_id)
+        return None
 
 
 class Position(BaseModel):
@@ -159,9 +167,12 @@ class AssignmentTask(BaseModel):
 
 
 class AssignmentReward(BaseModel):
-    """A reward in an assignment"""
+    """
+    A reward in an assignment\n
+    Medals: 1
+    """
 
-    type: int
+    type: typing.Literal[1]
     amount: int
 
 

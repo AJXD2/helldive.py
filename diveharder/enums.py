@@ -24,12 +24,10 @@ class ValueTypes(BetterEnum):
     RACE = 1
     UNKNOWN = 2
     TARGET_COUNT = 3
+    UNIT_ID = 4
+    ITEM_ID = 5
     LIBERATE = 11
     PLANET = 12
-
-
-class Values(BetterEnum):
-    PLANET_INDEX = 2
 
 
 class RewardTypes(BetterEnum):
