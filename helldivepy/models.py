@@ -1,8 +1,8 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
 import typing
-import diveharder.enums as enums
-import diveharder.utils as utils
+import helldivepy.enums as enums
+import helldivepy.utils as utils
 
 
 class APIURLConfiguration(BaseModel):
@@ -77,7 +77,7 @@ class PlanetEvent(BaseModel):
 
     @property
     def planet(self) -> "Planet | None":
-        from diveharder import ApiClient
+        from helldivepy import ApiClient
 
         if ApiClient._instance:
             return ApiClient._instance.planets.get_planet(self.campaign_id)
@@ -148,14 +148,14 @@ class AssignmentTask(BaseModel):
     )
 
     def model_post_init(self, __context: typing.Any) -> None:
-        from diveharder.api_client import ApiClient
+        from helldivepy.api_client import ApiClient
 
         client = ApiClient._instance
         if client is None:
             raise ValueError("ApiClient is not initialized")
 
         for k, v in zip(self.value_types, self.values):
-            match (k):
+            match k:
                 case enums.ValueTypes.PLANET:
                     self.data.planet = client.planets.get_planet(v, cached=True)
                 case enums.ValueTypes.RACE:
@@ -190,11 +190,10 @@ class Assignment(BaseModel):
 
     @property
     def is_complete(self) -> bool:
-        for index, task in enumerate(self.tasks):
-            if task.data.target_count == self.progress[index]:
-                continue
-            return False
-        return True
+        return all(
+            task.data.target_count == self.progress[index]
+            for index, task in enumerate(self.tasks)
+        )
 
     def __str__(self) -> str:
         return f"{self.title} - {self.briefing}"

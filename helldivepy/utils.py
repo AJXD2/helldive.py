@@ -1,6 +1,6 @@
 import re
-from diveharder.constants import FACTIONS
-import diveharder.enums as enums
+from helldivepy.constants import FACTIONS
+import helldivepy.enums as enums
 
 
 def hdml_to_md(text: str) -> str:

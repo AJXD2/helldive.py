@@ -1,16 +1,18 @@
 import logging
 import requests
 from requests.adapters import HTTPAdapter, Retry
-from diveharder.constants import OFFICIAL_DIVEHARDER_URL, OFFICIAL_COMMUNITY_URL
-import diveharder.models as models
+from helldivepy.constants import OFFICIAL_DIVEHARDER_URL, OFFICIAL_COMMUNITY_URL
+import helldivepy.models as models
 import typing
-import diveharder.api as modules
+import helldivepy.api as modules
 
 
 def retry_adapter(
-    backoff_factor: float, retries: int, extra_retry_codes: list = []
+    backoff_factor: float, retries: int, extra_retry_codes: list | None = None
 ) -> HTTPAdapter:
     """Configures an HTTP adapter with retries and backoff."""
+    if extra_retry_codes is None:
+        extra_retry_codes = []
     retry_codes = [429] + extra_retry_codes
     retry_strategy = Retry(
         total=retries,

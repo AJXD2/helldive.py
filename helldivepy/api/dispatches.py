@@ -1,9 +1,9 @@
-from diveharder.api.base import BaseApiModule
+from helldivepy.api.base import BaseApiModule
 import typing
-import diveharder.models as models
+import helldivepy.models as models
 
 if typing.TYPE_CHECKING:
-    from diveharder.api_client import ApiClient
+    from helldivepy.api_client import ApiClient
 
 
 class DispatchModule(BaseApiModule):

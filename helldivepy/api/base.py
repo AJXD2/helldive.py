@@ -1,11 +1,11 @@
 import typing
 import requests
-from diveharder.utils import (
+from helldivepy.utils import (
     DiveHarderAPIConnectionError,
 )
 
 if typing.TYPE_CHECKING:
-    from diveharder.api_client import ApiClient
+    from helldivepy.api_client import ApiClient
 
 
 class BaseApiModule:
