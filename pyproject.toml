@@ -12,7 +12,6 @@ classifiers = [
     "Topic :: Games/Entertainment",
     "Topic :: System :: Networking",
     "Typing :: Typed",
-    
 ]
 homepage = "https://github.com/ajxd2/diveharder-wrapper"
 
@@ -21,7 +20,7 @@ homepage = "https://github.com/ajxd2/diveharder-wrapper"
 python = "^3.11"
 requests = "^2.32.3"
 fire = "^0.7.0"
-rich = "^13.9.2"
+rich = "^13.9.3"
 pydantic = "^2.9.2"
 
 [build-system]
