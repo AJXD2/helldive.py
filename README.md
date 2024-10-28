@@ -1,5 +1,6 @@
 # Helldive.py
 
+
 [![PyPI](https://img.shields.io/pypi/v/helldivepy.svg?label=PyPI&color=blue)](https://pypi.org/project/helldivepy/)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/helldivepy?color=brightgreen)
 ![GitHub License](https://img.shields.io/github/license/ajxd2/helldive.py?color=yellow)
@@ -15,7 +16,7 @@
 To install **Helldive.py**, just use pip:
 
 ```bash
-pip install helldive.py
+pip install helldivepy
 ```
 
 ## 🚀 Quickstart
