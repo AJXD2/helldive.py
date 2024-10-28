@@ -1,0 +1,52 @@
+name: Lint and Format
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-and-format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry install
+
+      - name: Run Black Formatter
+        run: |
+          poetry run black . --check
+        continue-on-error: true
+
+      - name: Run Flake8 Linter
+        run: |
+          poetry run flake8 .
+        continue-on-error: true
+
+      - name: Output Results
+        if: failure()
+        run: echo "Lint or format issues detected. Please fix them."
+
+      - name: Auto-commit formatted code
+        if: failure()
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          poetry run black .
+          git add .
+          git commit -m "Fix formatting with Black"
+          git push
