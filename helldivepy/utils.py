@@ -1,4 +1,6 @@
 import re
+from helldivepy.constants import FACTIONS
+import helldivepy.enums as enums
 
 
 def hdml_to_md(text: str) -> str:
@@ -36,3 +38,23 @@ def hdml_to_md(text: str) -> str:
 def url_join(*args):
     """Join combine URL parts to get the full endpoint address."""
     return "/".join(arg.strip("/") for arg in args)
+
+
+def parse_faction(faction: int) -> enums.FactionType | None:
+    """Parse faction ID to string
+
+    Args:
+        faction (int): The faction ID
+
+    Returns:
+        str: The faction name
+    """
+    return FACTIONS.get(faction, None)  # type: ignore
+
+
+class DiveHarderException(Exception):
+    """Base exception for all DiveHarder exceptions."""
+
+
+class DiveHarderAPIConnectionError(DiveHarderException):
+    """Exception raised when the DiveHarder API connection fails."""

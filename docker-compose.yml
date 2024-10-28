@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  helldivers-api:
+    image: helldivers2-api
+    ports:
+      - "9090:8080"
+    container_name: helldivers-api
+    # https://helldivers-2.github.io/api/docs/containers.html
+    env_file:
+      - .vscode/helldivers.env
+    restart: unless-stopped
+  diveharder-api:
+    image: diveharder_api.py
+    ports:
+      - "9091:1234"
+    container_name: diveharder-api
+    # https://github.com/helldivers-2/diveharder_api.py/blob/main/src/cfg/env/.env.example
+    env_file:
+      - .vscode/diveharder.env
+    restart: unless-stopped
