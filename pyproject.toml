@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "diveharder"
-version = "0.1.2"
+name = "helldivepy"
+version = "0.1.0"
 description = "A Helldivers 2 API wrapper using the Diveharder API and the Helldivers Community API"
 authors = ["AJXD2 <aj@ajxd2.dev>"]
 license = "MIT"
 readme = "README.md"
-keywords = ["helldivers 2","api","wrapper","diveharder","community"]
+keywords = ["helldivers 2", "api", "wrapper", "diveharder", "community"]
 classifiers = [
     "Intended Audience :: Developers",
     "Programming Language :: Python :: 3.11",
@@ -13,8 +13,11 @@ classifiers = [
     "Topic :: System :: Networking",
     "Typing :: Typed",
 ]
-homepage = "https://github.com/ajxd2/diveharder-wrapper"
 
+[tool.poetry.urls]
+homepage = "https://github.com/ajxd2/helldive.py"
+repository = "https://github.com/ajxd2/helldive.py"
+documentation = "https://github.com/ajxd2/helldive.py#readme"
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -24,5 +27,5 @@ rich = "^13.9.3"
 pydantic = "^2.9.2"
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
