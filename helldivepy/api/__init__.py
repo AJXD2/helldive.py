@@ -4,6 +4,7 @@ from .steam import SteamModule
 from .assignments import AssignmentsModule
 from .planets import PlanetsModule
 from .campaigns import CampaignModule
+from .space_stations import SpaceStationModule
 
 __all__ = [
     "DispatchModule",
@@ -12,4 +13,5 @@ __all__ = [
     "AssignmentsModule",
     "PlanetsModule",
     "CampaignModule",
+    "SpaceStationModule",
 ]

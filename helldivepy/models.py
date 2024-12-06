@@ -128,8 +128,30 @@ class Planet(BaseModel):
     statistics: Statistics
     attacking: list[int]
 
+    @property
+    def has_space_station(self) -> bool:
+        """Checks if a space station is on this planet.
 
-# TODO: make better docstrings
+        Raises:
+            RuntimeError: In the very rare case that the `ApiClient` is not initialized this will be raised.
+
+        Returns:
+            bool: If the space station is on the planet
+        """
+        from helldivepy import ApiClient
+
+        if not ApiClient._instance:
+            raise RuntimeError("ApiClient not initialized.")
+
+        client = ApiClient._instance
+
+        stations = client.space_stations.get_space_stations()
+        if self.index in [i.planet.index for i in stations]:
+            return True
+
+        return False
+
+
 class AssignmentTaskData(BaseModel):
     liberate: bool | None
     planet: Planet | None
@@ -206,3 +228,10 @@ class Campaign(BaseModel):
     planet: Planet
     type: int
     count: int
+
+
+class SpaceStation(BaseModel):
+    id: int = Field(alias="id32")
+    planet: Planet
+    election_end: datetime = Field(alias="electionEnd")
+    flags: int

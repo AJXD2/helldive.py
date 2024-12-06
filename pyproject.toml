@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "helldivepy"
-version = "0.1.0"
+version = "0.1.1"
 description = "A Helldivers 2 API wrapper using the Diveharder API and the Helldivers Community API"
 authors = ["AJXD2 <aj@ajxd2.dev>"]
 license = "MIT"
