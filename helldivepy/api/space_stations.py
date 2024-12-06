@@ -1,8 +1,8 @@
 from helldivepy.api.base import BaseApiModule
-import typing
 import helldivepy.models as models
+from typing import Optional, TYPE_CHECKING
 
-if typing.TYPE_CHECKING:
+if TYPE_CHECKING:
     from helldivepy.api_client import ApiClient
 
 
@@ -11,24 +11,24 @@ class SpaceStationModule(BaseApiModule):
         super().__init__(api_client)
 
     def get_space_stations(self) -> list[models.SpaceStation]:
-        """Gets all spacestations
+        """
+        Retrieves all space stations.
 
         Returns:
-            list[models.SpaceStation]: The response from the server.
+            list[SpaceStation]: A list of space station objects from the server.
         """
         data = self.get("community", "api", "v1", "space-stations")
-        return [models.SpaceStation(**i) for i in data]
+        return [models.SpaceStation(**item) for item in data]
 
-    def get_space_station(self, index: int) -> typing.Optional[models.SpaceStation]:
-        """Get a space station by its ID.
+    def get_space_station(self, index: int) -> Optional[models.SpaceStation]:
+        """
+        Retrieves a space station by its ID.
 
         Args:
-            index (int): The ID of the space station
+            index (int): The ID of the space station.
 
         Returns:
-            typing.Optional[models.SpaceStation]: The response from the server.
+            Optional[SpaceStation]: The space station object if found, or None.
         """
         data = self.get("community", "api", "v1", "space", "stations", str(index))
-        if not data:
-            return None
-        return models.SpaceStation(**data)
+        return models.SpaceStation(**data) if data else None
