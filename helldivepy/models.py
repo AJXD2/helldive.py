@@ -152,7 +152,6 @@ class Planet(BaseModel):
         return False
 
 
-# TODO: make better docstrings
 class AssignmentTaskData(BaseModel):
     liberate: bool | None
     planet: Planet | None
