@@ -206,3 +206,10 @@ class Campaign(BaseModel):
     planet: Planet
     type: int
     count: int
+
+
+class SpaceStation(BaseModel):
+    id: int = Field(alias="id32")
+    planet: Planet
+    election_end: datetime = Field(alias="electionEnd")
+    flags: int

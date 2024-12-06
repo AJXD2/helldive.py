@@ -51,6 +51,7 @@ class ModuleDict(typing.TypedDict):
     assignments: modules.AssignmentsModule
     planets: modules.PlanetsModule
     campaigns: modules.CampaignModule
+    space_stations: modules.SpaceStationModule
 
 
 class ApiClient:
@@ -102,6 +103,7 @@ class ApiClient:
             assignments=modules.AssignmentsModule(self),
             planets=modules.PlanetsModule(self),
             campaigns=modules.CampaignModule(self),
+            space_stations=modules.SpaceStationModule(self),
         )
 
     def _setup_session(self):
@@ -148,6 +150,10 @@ class ApiClient:
     @property
     def campaigns(self) -> modules.CampaignModule:
         return self._modules["campaigns"]
+
+    @property
+    def space_stations(self) -> modules.SpaceStationModule:
+        return self._modules["space_stations"]
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.api_config})"
