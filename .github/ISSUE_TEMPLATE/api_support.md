@@ -1,3 +1,4 @@
+---
 name: "🔧 API Support"
 about: Report API changes or ask for new endpoints
 title: "[API] "

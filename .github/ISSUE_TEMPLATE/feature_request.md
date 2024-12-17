@@ -1,3 +1,4 @@
+---
 name: "🚀 Feature Request"
 about: Suggest new features for helldive.py
 title: "[Feature] "

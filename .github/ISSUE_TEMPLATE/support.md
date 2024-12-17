@@ -1,3 +1,4 @@
+---
 name: "❓ Support Request"
 about: Ask for help with using helldive.py
 title: "[Support] "

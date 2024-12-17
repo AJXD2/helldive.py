@@ -1,3 +1,4 @@
+---
 name: "🐛 Bug Report"
 about: Report a bug with the library
 title: "[Bug] "
