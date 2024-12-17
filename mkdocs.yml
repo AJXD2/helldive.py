@@ -1,11 +1,29 @@
 # mkdocs.yml
 site_name: Helldive.py
-theme:
+site_description: Docs for the helldive.py library.
+site_author: AJXD2
+site_url: https://ajxd2.github.io/helldive.py/
+
+repo_name: ajxd2/helldive.py
+repo_url: https://github.com/ajxd2/helldive.py
+
+
+theme: 
   name: material
+  icon:
+    logo: material/cog
+  language: en
+  features:
+    - navigation.sections
+    - navigation.tabs
+    - content.code.copy
+    - content.code.select
   palette:
-    primary: indigo
-    accent: indigo
+    scheme: slate
+    primary: teal
+    accent: teal
 plugins:
+  
   - search
   - mkdocstrings:
       default_handler: python
@@ -32,12 +50,28 @@ plugins:
             separate_signature: true
             docstring_style: google
 nav:
-  - Home: index.md
+  - Home:
+    - Introduction: index.md 
+    - Installation: installation.md
+    
   - API Reference:
       - Overview: api/index.md
-      - Module Name:
+      - Helldive.py:
           - api/constants.md
           - api/enums.md
           - api/models.md
           - api/routes.md
           - api/utils.md
+      
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - admonition
+  - footnotes
+  - codehilite
+  - pymdownx.snippets
+  - pymdownx.inlinehilite
+  - pymdownx.details
+  - pymdownx.superfences
