@@ -66,7 +66,7 @@ class PlanetEvent(BaseModel):
     """An event on a planet."""
 
     id: int
-    event_type: typing.Literal[1] = Field(alias="eventType")
+    event_type: int = Field(alias="eventType")
     faction: enums.FactionType
     health: int
     max_health: int = Field(alias="maxHealth")
@@ -179,7 +179,7 @@ class AssignmentTask(BaseModel):
         for k, v in zip(self.value_types, self.values):
             match k:
                 case enums.ValueTypes.PLANET:
-                    self.data.planet = client.planets.get_planet(v, cached=True)
+                    self.data.planet = client.planets.get_planet(v)
                 case enums.ValueTypes.RACE:
                     self.data.race = utils.parse_faction(v)
                 case enums.ValueTypes.TARGET_COUNT:
@@ -189,12 +189,7 @@ class AssignmentTask(BaseModel):
 
 
 class AssignmentReward(BaseModel):
-    """
-    A reward in an assignment\n
-    Medals: 1
-    """
-
-    type: typing.Literal[1]
+    type: int
     amount: int
 
 
