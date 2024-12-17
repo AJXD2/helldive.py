@@ -11,6 +11,15 @@
 
 ---
 
+## 📕 Contents
+
+- [Helldive.py](#helldivepy)
+  - [📕 Contents](#-contents)
+  - [⚙️ Installation](#️-installation)
+  - [🚀 Quickstart](#-quickstart)
+  - [🌟 Features](#-features)
+  - [🔗 Links](#-links)
+
 ## ⚙️ Installation
 
 To install **Helldive.py**, just use pip:
@@ -48,10 +57,11 @@ print(dispatches)
 
 ---
 
-## 🛠️ Contributing
+## 🔗 Links
 
-Contributions are always welcome! If you’d like to make changes, feel free to submit a pull request. For major updates, open an issue first to discuss your ideas.
-
-## 📄 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+- [Contributing](./CONTRIBUTING.md)
+- [Security](./SECURITY.md)
+- [Code of conduct](./CODE_OF_CONDUCT.md)
+- [DiveHarder](https://github.com/helldivers-2/diveharder_api.py)
+- [Community API](https://github.com/helldivers-2/api)
+- [API discussion Discord](https://discord.gg/MThYGMCqgp)
