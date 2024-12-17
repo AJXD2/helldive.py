@@ -10,8 +10,8 @@ repo_url: https://github.com/ajxd2/helldive.py
 
 theme: 
   name: material
-  icon:
-    logo: material/cog
+  logo: images/favicon.png
+    
   language: en
   features:
     - navigation.sections
@@ -22,14 +22,43 @@ theme:
     scheme: slate
     primary: teal
     accent: teal
+  favicon: images/favicon.png
+
+
+extra:
+  consent:
+    title: Cookie consent
+    description: >- 
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+  analytics:
+    provider: google
+    property: G-YS5CTZLJFE
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - admonition
+  - footnotes
+  - codehilite
+  - pymdownx.snippets
+  - pymdownx.inlinehilite
+  - pymdownx.details
+  - pymdownx.superfences
+
+
+
 plugins:
-  
   - search
   - mkdocstrings:
       default_handler: python
       handlers:
         python:
-          paths: [./]  # Path to your source code
+          paths: [./] 
           options:
             members: true
             members_order: source
@@ -41,8 +70,8 @@ plugins:
             show_category_heading: true
             show_if_no_docstring: true
             filters:
-              - "!^_"  # Exclude private members (starting with underscore)
-              - "!^__"  # Exclude special members (starting with double underscore)
+              - "!^_"  
+              - "!^__"  
             docstring_section_style: spacy
             merge_init_into_class: true
             show_signature: true
@@ -63,15 +92,3 @@ nav:
           - api/routes.md
           - api/utils.md
       
-markdown_extensions:
-  - pymdownx.highlight:
-      anchor_linenums: true
-      line_spans: __span
-      pygments_lang_class: true
-  - admonition
-  - footnotes
-  - codehilite
-  - pymdownx.snippets
-  - pymdownx.inlinehilite
-  - pymdownx.details
-  - pymdownx.superfences

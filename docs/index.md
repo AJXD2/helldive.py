@@ -13,35 +13,6 @@ icon: material/human-greeting
 
 ---
 
-## ⚙️ Installation
-
-To install **Helldive.py**, just use pip:
-
-```sh
-pip install helldivepy
-```
-
-## 🚀 Quickstart
-
-Here's a super-quick example to get you diving right in:
-
-```py
-import helldivepy
-
-client = helldivepy.ApiClient(user_agent="my-app", user_contact="email@example.com")
-
-# Get the latest dispatches
-dispatches = client.dispatch.get_dispatches()
-
-print(dispatches)
-# Output example
-[
-   Dispatch(id=0, published=datetime.datetime, type=0, message='Hello, World 1!'),
-   Dispatch(id=1, published=datetime.datetime, type=0, message='Hello, World 2!'),
-   Dispatch(id=2, published=datetime.datetime, type=0, message='Hello, World 3!')
- ]
-```
-
 ## 🌟 Features
 
 - **Easy API Access**: Communicate with the Helldivers Community API and Diveharder API without breaking a sweat.
