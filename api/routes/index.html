@@ -1,0 +1,2419 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../models/">
+      
+      
+        <link rel="next" href="../utils/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Routes - Helldive.py</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#routes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Helldive.py" class="md-header__button md-logo" aria-label="Helldive.py" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Helldive.py
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Routes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Helldive.py" class="md-nav__button md-logo" aria-label="Helldive.py" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Helldive.py
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            API Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Module Name
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Module Name
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../constants/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Constants
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../enums/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enums
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Routes
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Routes
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#helldivepy.api" class="md-nav__link">
+    <span class="md-ellipsis">
+      api
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="api">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attributes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.__all__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __all__
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.DispatchModule" class="md-nav__link">
+    <span class="md-ellipsis">
+      DispatchModule
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DispatchModule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.DispatchModule-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.DispatchModule.get_dispatches" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_dispatches
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.DispatchModule.get_dispatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_dispatch
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.WarModule" class="md-nav__link">
+    <span class="md-ellipsis">
+      WarModule
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="WarModule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.WarModule-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.WarModule.get_war_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_war_info
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SteamModule" class="md-nav__link">
+    <span class="md-ellipsis">
+      SteamModule
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SteamModule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SteamModule-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SteamModule.get_all_steam_news" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_all_steam_news
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SteamModule.get_steam_news" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_steam_news
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.AssignmentsModule" class="md-nav__link">
+    <span class="md-ellipsis">
+      AssignmentsModule
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AssignmentsModule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.AssignmentsModule-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.AssignmentsModule.get_all_assignments" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_all_assignments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.AssignmentsModule.get_assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_assignment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.PlanetsModule" class="md-nav__link">
+    <span class="md-ellipsis">
+      PlanetsModule
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PlanetsModule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.PlanetsModule-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.PlanetsModule.get_planets" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_planets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.PlanetsModule.get_planet" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_planet
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.PlanetsModule.get_planets_with_events" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_planets_with_events
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.CampaignModule" class="md-nav__link">
+    <span class="md-ellipsis">
+      CampaignModule
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CampaignModule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.CampaignModule-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.CampaignModule.get_campaigns" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_campaigns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.CampaignModule.get_campaign" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_campaign
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SpaceStationModule" class="md-nav__link">
+    <span class="md-ellipsis">
+      SpaceStationModule
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SpaceStationModule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SpaceStationModule-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SpaceStationModule.get_space_stations" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_space_stations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SpaceStationModule.get_space_station" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_space_station
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#helldivepy.api" class="md-nav__link">
+    <span class="md-ellipsis">
+      api
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="api">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attributes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.__all__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __all__
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.DispatchModule" class="md-nav__link">
+    <span class="md-ellipsis">
+      DispatchModule
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DispatchModule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.DispatchModule-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.DispatchModule.get_dispatches" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_dispatches
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.DispatchModule.get_dispatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_dispatch
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.WarModule" class="md-nav__link">
+    <span class="md-ellipsis">
+      WarModule
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="WarModule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.WarModule-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.WarModule.get_war_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_war_info
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SteamModule" class="md-nav__link">
+    <span class="md-ellipsis">
+      SteamModule
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SteamModule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SteamModule-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SteamModule.get_all_steam_news" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_all_steam_news
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SteamModule.get_steam_news" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_steam_news
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.AssignmentsModule" class="md-nav__link">
+    <span class="md-ellipsis">
+      AssignmentsModule
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AssignmentsModule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.AssignmentsModule-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.AssignmentsModule.get_all_assignments" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_all_assignments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.AssignmentsModule.get_assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_assignment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.PlanetsModule" class="md-nav__link">
+    <span class="md-ellipsis">
+      PlanetsModule
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PlanetsModule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.PlanetsModule-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.PlanetsModule.get_planets" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_planets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.PlanetsModule.get_planet" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_planet
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.PlanetsModule.get_planets_with_events" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_planets_with_events
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.CampaignModule" class="md-nav__link">
+    <span class="md-ellipsis">
+      CampaignModule
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CampaignModule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.CampaignModule-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.CampaignModule.get_campaigns" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_campaigns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.CampaignModule.get_campaign" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_campaign
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SpaceStationModule" class="md-nav__link">
+    <span class="md-ellipsis">
+      SpaceStationModule
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SpaceStationModule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SpaceStationModule-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SpaceStationModule.get_space_stations" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_space_stations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helldivepy.api.SpaceStationModule.get_space_station" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_space_station
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="routes">Routes</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="helldivepy.api" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">helldivepy.api</span>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+<h3 id="helldivepy.api-attributes">Attributes</h3>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="helldivepy.api.__all__" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">helldivepy.api.__all__</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;DispatchModule&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;WarModule&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SteamModule&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AssignmentsModule&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PlanetsModule&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CampaignModule&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SpaceStationModule&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+<h3 id="helldivepy.api-classes">Classes</h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="helldivepy.api.DispatchModule" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">helldivepy.api.DispatchModule</span>
+
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">DispatchModule</span><span class="p">(</span><span class="n">api_client</span><span class="p">:</span> <span class="n">ApiClient</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="helldivepy.api.base.BaseApiModule">BaseApiModule</span></code></p>
+
+
+        <p>The Dispatch API module. This module is used to interact with all dispatches (Ingame News)</p>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="helldivepy.api.DispatchModule.get_dispatches" href="#helldivepy.api.DispatchModule.get_dispatches">get_dispatches</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>bool): Gets all dispatches and orders them based on the <code>old_to_new</code> argument.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="helldivepy.api.DispatchModule.get_dispatch" href="#helldivepy.api.DispatchModule.get_dispatch">get_dispatch</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>int): Gets a dispatch by its ID.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<h5 id="helldivepy.api.DispatchModule-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="helldivepy.api.DispatchModule.get_dispatches" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">helldivepy.api.DispatchModule.get_dispatches</span>
+
+
+</h6>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_dispatches</span><span class="p">(</span>
+    <span class="n">old_to_new</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">models</span><span class="o">.</span><span class="n">Dispatch</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Gets the information about the current war.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="helldivepy.api.DispatchModule.get_dispatch" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">helldivepy.api.DispatchModule.get_dispatch</span>
+
+
+</h6>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_dispatch</span><span class="p">(</span><span class="n">dispatch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">models</span><span class="o">.</span><span class="n">Dispatch</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Gets the information about the current war.</p>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="helldivepy.api.WarModule" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">helldivepy.api.WarModule</span>
+
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">WarModule</span><span class="p">(</span><span class="n">api_client</span><span class="p">:</span> <span class="n">ApiClient</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="helldivepy.api.base.BaseApiModule">BaseApiModule</span></code></p>
+
+
+        <p>The War module of the API. This module is used to get all info about the current war.</p>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="helldivepy.api.WarModule.get_war_info" href="#helldivepy.api.WarModule.get_war_info">get_war_info</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Gets the information about the current war.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<h5 id="helldivepy.api.WarModule-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="helldivepy.api.WarModule.get_war_info" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">helldivepy.api.WarModule.get_war_info</span>
+
+
+</h6>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_war_info</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">models</span><span class="o">.</span><span class="n">WarInfo</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Gets the information about the current war.</p>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="helldivepy.api.SteamModule" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">helldivepy.api.SteamModule</span>
+
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">SteamModule</span><span class="p">(</span><span class="n">api_client</span><span class="p">:</span> <span class="n">ApiClient</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="helldivepy.api.base.BaseApiModule">BaseApiModule</span></code></p>
+
+
+        <p>The Steam API module. Used to get all the Game updates and News.</p>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="helldivepy.api.SteamModule.get_all_steam_news" href="#helldivepy.api.SteamModule.get_all_steam_news">get_all_steam_news</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Gets all the steam news.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="helldivepy.api.SteamModule.get_steam_news" href="#helldivepy.api.SteamModule.get_steam_news">get_steam_news</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>str): Gets a steam news item by its ID.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<h5 id="helldivepy.api.SteamModule-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="helldivepy.api.SteamModule.get_all_steam_news" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">helldivepy.api.SteamModule.get_all_steam_news</span>
+
+
+</h6>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_all_steam_news</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">models</span><span class="o">.</span><span class="n">SteamNews</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Gets the information about the current war.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="helldivepy.api.SteamModule.get_steam_news" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">helldivepy.api.SteamModule.get_steam_news</span>
+
+
+</h6>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_steam_news</span><span class="p">(</span><span class="n">gid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">models</span><span class="o">.</span><span class="n">SteamNews</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Gets the information about the current war.</p>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="helldivepy.api.AssignmentsModule" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">helldivepy.api.AssignmentsModule</span>
+
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">AssignmentsModule</span><span class="p">(</span><span class="n">api_client</span><span class="p">:</span> <span class="n">ApiClient</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="helldivepy.api.base.BaseApiModule">BaseApiModule</span></code></p>
+
+
+        <p>The Assignments API module (Major Order). This module is used to interact with the current major order(s).</p>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="helldivepy.api.AssignmentsModule.get_all_assignments" href="#helldivepy.api.AssignmentsModule.get_all_assignments">get_all_assignments</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Gets all current assignments</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="helldivepy.api.AssignmentsModule.get_assignment" href="#helldivepy.api.AssignmentsModule.get_assignment">get_assignment</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>int): Gets one assignment using the assignment ID</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<h5 id="helldivepy.api.AssignmentsModule-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="helldivepy.api.AssignmentsModule.get_all_assignments" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">helldivepy.api.AssignmentsModule.get_all_assignments</span>
+
+
+</h6>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_all_assignments</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">models</span><span class="o">.</span><span class="n">Assignment</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Gets all current assignments</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="helldivepy.api.AssignmentsModule.get_assignment" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">helldivepy.api.AssignmentsModule.get_assignment</span>
+
+
+</h6>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_assignment</span><span class="p">(</span><span class="n">assignment_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">models</span><span class="o">.</span><span class="n">Assignment</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Gets one assignment using the assignment ID</p>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="helldivepy.api.PlanetsModule" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">helldivepy.api.PlanetsModule</span>
+
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PlanetsModule</span><span class="p">(</span><span class="n">api_client</span><span class="p">:</span> <span class="n">ApiClient</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="helldivepy.api.base.BaseApiModule">BaseApiModule</span></code></p>
+
+
+        <p>The Planets API module. This module is used to interact with the planets.</p>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="helldivepy.api.PlanetsModule.get_planets" href="#helldivepy.api.PlanetsModule.get_planets">get_planets</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Gets all planets.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="helldivepy.api.PlanetsModule.get_planet" href="#helldivepy.api.PlanetsModule.get_planet">get_planet</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>int): Gets a planet using the index.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="helldivepy.api.PlanetsModule.get_planets_with_events" href="#helldivepy.api.PlanetsModule.get_planets_with_events">get_planets_with_events</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Gets all planets with events.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<h5 id="helldivepy.api.PlanetsModule-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="helldivepy.api.PlanetsModule.get_planets" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">helldivepy.api.PlanetsModule.get_planets</span>
+
+
+</h6>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_planets</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">models</span><span class="o">.</span><span class="n">Planet</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get all planets</p>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">RETURNS</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <span class="doc-returns-annotation">
+                    <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="helldivepy.models.Planet" href="../models/#helldivepy.models.Planet">Planet</a>]</code>
+                </span>
+            </td>
+            <td class="doc-returns-details">
+              <div class="doc-md-description">
+                <p>typing.List[models.Planet]: The list of planet objects</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="helldivepy.api.PlanetsModule.get_planet" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">helldivepy.api.PlanetsModule.get_planet</span>
+
+
+</h6>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_planet</span><span class="p">(</span>
+    <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">cached</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">models</span><span class="o">.</span><span class="n">Planet</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Gets a planet using the index</p>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">PARAMETER</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>index</code>
+            </td>
+            <td class="doc-param-details">
+              <div class="doc-md-description">
+                <p>The index of the planet</p>
+              </div>
+              <p>
+                  <span class="doc-param-annotation">
+                    <b>TYPE:</b>
+                      <code>int</code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">RETURNS</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <span class="doc-returns-annotation">
+                    <code><a class="autorefs autorefs-internal" title="helldivepy.models.Planet" href="../models/#helldivepy.models.Planet">Planet</a></code>
+                </span>
+            </td>
+            <td class="doc-returns-details">
+              <div class="doc-md-description">
+                <p>models.Planet: The planet object</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="helldivepy.api.PlanetsModule.get_planets_with_events" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">helldivepy.api.PlanetsModule.get_planets_with_events</span>
+
+
+</h6>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_planets_with_events</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">models</span><span class="o">.</span><span class="n">Planet</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Gets all planets with an active event</p>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">RETURNS</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <span class="doc-returns-annotation">
+                    <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="helldivepy.models.Planet" href="../models/#helldivepy.models.Planet">Planet</a>]</code>
+                </span>
+            </td>
+            <td class="doc-returns-details">
+              <div class="doc-md-description">
+                <p>typing.List[models.Planet]: The list of planet objects</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="helldivepy.api.CampaignModule" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">helldivepy.api.CampaignModule</span>
+
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">CampaignModule</span><span class="p">(</span><span class="n">api_client</span><span class="p">:</span> <span class="n">ApiClient</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="helldivepy.api.base.BaseApiModule">BaseApiModule</span></code></p>
+
+
+        <p>The Campaign API module. This module is used to interact with all campaigns (Battles/Planets that are accessible).</p>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="helldivepy.api.CampaignModule.get_campaigns" href="#helldivepy.api.CampaignModule.get_campaigns">get_campaigns</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Gets all current active campaigns.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="helldivepy.api.CampaignModule.get_campaign" href="#helldivepy.api.CampaignModule.get_campaign">get_campaign</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>int): Gets a campaign by its ID.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<h5 id="helldivepy.api.CampaignModule-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="helldivepy.api.CampaignModule.get_campaigns" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">helldivepy.api.CampaignModule.get_campaigns</span>
+
+
+</h6>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_campaigns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">models</span><span class="o">.</span><span class="n">Campaign</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Gets all current active campaigns.</p>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">RETURNS</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <span class="doc-returns-annotation">
+                    <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="helldivepy.models.Campaign" href="../models/#helldivepy.models.Campaign">Campaign</a>]</code>
+                </span>
+            </td>
+            <td class="doc-returns-details">
+              <div class="doc-md-description">
+                <p>typing.List[models.Campaign]: The campaigns.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="helldivepy.api.CampaignModule.get_campaign" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">helldivepy.api.CampaignModule.get_campaign</span>
+
+
+</h6>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_campaign</span><span class="p">(</span><span class="n">campaign_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">models</span><span class="o">.</span><span class="n">Campaign</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Gets a campaign by its ID.</p>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">PARAMETER</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>campaign_id</code>
+            </td>
+            <td class="doc-param-details">
+              <div class="doc-md-description">
+                <p>The ID of the campaign.</p>
+              </div>
+              <p>
+                  <span class="doc-param-annotation">
+                    <b>TYPE:</b>
+                      <code>int</code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">RETURNS</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <span class="doc-returns-annotation">
+                    <code><a class="autorefs autorefs-internal" title="helldivepy.models.Campaign" href="../models/#helldivepy.models.Campaign">Campaign</a></code>
+                </span>
+            </td>
+            <td class="doc-returns-details">
+              <div class="doc-md-description">
+                <p>models.Campaign: The campaign.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="helldivepy.api.SpaceStationModule" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">helldivepy.api.SpaceStationModule</span>
+
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">SpaceStationModule</span><span class="p">(</span><span class="n">api_client</span><span class="p">:</span> <span class="n">ApiClient</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="helldivepy.api.base.BaseApiModule">BaseApiModule</span></code></p>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<h5 id="helldivepy.api.SpaceStationModule-functions">Functions</h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="helldivepy.api.SpaceStationModule.get_space_stations" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">helldivepy.api.SpaceStationModule.get_space_stations</span>
+
+
+</h6>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_space_stations</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">models</span><span class="o">.</span><span class="n">SpaceStation</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Retrieves all space stations.</p>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">RETURNS</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <span class="doc-returns-annotation">
+                    <code>list[<a class="autorefs autorefs-internal" title="helldivepy.models.SpaceStation" href="../models/#helldivepy.models.SpaceStation">SpaceStation</a>]</code>
+                </span>
+            </td>
+            <td class="doc-returns-details">
+              <div class="doc-md-description">
+                <p>list[SpaceStation]: A list of space station objects from the server.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="helldivepy.api.SpaceStationModule.get_space_station" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">helldivepy.api.SpaceStationModule.get_space_station</span>
+
+
+</h6>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_space_station</span><span class="p">(</span>
+    <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">models</span><span class="o">.</span><span class="n">SpaceStation</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Retrieves a space station by its ID.</p>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">PARAMETER</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>index</code>
+            </td>
+            <td class="doc-param-details">
+              <div class="doc-md-description">
+                <p>The ID of the space station.</p>
+              </div>
+              <p>
+                  <span class="doc-param-annotation">
+                    <b>TYPE:</b>
+                      <code>int</code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">RETURNS</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <span class="doc-returns-annotation">
+                    <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="helldivepy.models.SpaceStation" href="../models/#helldivepy.models.SpaceStation">SpaceStation</a>]</code>
+                </span>
+            </td>
+            <td class="doc-returns-details">
+              <div class="doc-md-description">
+                <p>Optional[SpaceStation]: The space station object if found, or None.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>
