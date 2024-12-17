@@ -1,1 +1,5 @@
 blank_issues_enabled: false
+contact_links:
+  - name: Helldivers 2 API Discussion Discord
+    url: https://discord.gg/MThYGMCqgp
+    about: Join the Discord server for additional questions or real-time discussions.
