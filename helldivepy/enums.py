@@ -1,6 +1,8 @@
 from enum import Enum
 import typing
 
+# {"1": "race", "2": "unknown", "3": "goal", "11": "liberate", "12": "planet_index"}
+
 
 class BetterEnum(Enum):
     @classmethod
@@ -9,6 +11,14 @@ class BetterEnum(Enum):
             return cls(value)
         except ValueError:
             return None
+
+
+class CampaignTypes(BetterEnum):
+    """Types of campaigns in the game"""
+
+    LIBERATION_DEFENSE = 0
+    RECON = 1
+    STORY = 2
 
 
 class ValueTypes(BetterEnum):
