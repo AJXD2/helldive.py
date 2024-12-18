@@ -2,34 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://ajxd2.github.io/helldive.py/</loc>
-         <lastmod>2024-12-17</lastmod>
+         <lastmod>2024-12-18</lastmod>
     </url>
     <url>
          <loc>https://ajxd2.github.io/helldive.py/installation/</loc>
-         <lastmod>2024-12-17</lastmod>
+         <lastmod>2024-12-18</lastmod>
+    </url>
+    <url>
+         <loc>https://ajxd2.github.io/helldive.py/links/</loc>
+         <lastmod>2024-12-18</lastmod>
     </url>
     <url>
          <loc>https://ajxd2.github.io/helldive.py/api/</loc>
-         <lastmod>2024-12-17</lastmod>
+         <lastmod>2024-12-18</lastmod>
     </url>
     <url>
          <loc>https://ajxd2.github.io/helldive.py/api/constants/</loc>
-         <lastmod>2024-12-17</lastmod>
+         <lastmod>2024-12-18</lastmod>
     </url>
     <url>
          <loc>https://ajxd2.github.io/helldive.py/api/enums/</loc>
-         <lastmod>2024-12-17</lastmod>
+         <lastmod>2024-12-18</lastmod>
     </url>
     <url>
          <loc>https://ajxd2.github.io/helldive.py/api/models/</loc>
-         <lastmod>2024-12-17</lastmod>
+         <lastmod>2024-12-18</lastmod>
     </url>
     <url>
          <loc>https://ajxd2.github.io/helldive.py/api/routes/</loc>
-         <lastmod>2024-12-17</lastmod>
+         <lastmod>2024-12-18</lastmod>
     </url>
     <url>
          <loc>https://ajxd2.github.io/helldive.py/api/utils/</loc>
-         <lastmod>2024-12-17</lastmod>
+         <lastmod>2024-12-18</lastmod>
     </url>
 </urlset>
