@@ -22,7 +22,7 @@ icon: material/human-greeting
 ---
 
 ## 🔗 Links
-
+- [Get Started](installation.md)
 - [DiveHarder](https://github.com/helldivers-2/diveharder_api.py)
 - [Community API](https://github.com/helldivers-2/api)
 - [API discussion Discord](https://discord.gg/MThYGMCqgp)

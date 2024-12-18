@@ -14,7 +14,15 @@ theme:
     
   language: en
   features:
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
     - navigation.sections
+    - navigation.tracking
+    - navigation.path
+    - navigation.top
+    - navigation.footer
     - navigation.tabs
     - content.code.copy
     - content.code.select
@@ -36,12 +44,23 @@ extra:
   analytics:
     provider: google
     property: G-YS5CTZLJFE
-
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ajxd2
+    - icon: fontawesome/brands/youtube
+      link: https://youtube.com/@ajxd2
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/u/ajxd2
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/helldivepy/
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - admonition
   - footnotes
   - codehilite
@@ -49,8 +68,10 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.details
   - pymdownx.superfences
-
-
+  - attr_list
+  - md_in_html
+  - pymdownx.tabbed:
+      alternate_style: true
 
 plugins:
   - search
@@ -82,7 +103,7 @@ nav:
   - Home:
     - Introduction: index.md 
     - Installation: installation.md
-    
+    - Links: links.md
   - API Reference:
       - Overview: api/index.md
       - Helldive.py:
