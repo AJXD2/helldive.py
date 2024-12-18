@@ -14,6 +14,7 @@ class BetterEnum(Enum):
 
 
 class CampaignTypes(BetterEnum):
+    """Types of campaigns in the game"""
 
     LIBERATION_DEFENSE = 0
     RECON = 1
@@ -21,6 +22,8 @@ class CampaignTypes(BetterEnum):
 
 
 class ValueTypes(BetterEnum):
+    """Types of values returned from the major order/assignments endpoint."""
+
     RACE = 1
     UNKNOWN = 2
     TARGET_COUNT = 3
@@ -31,10 +34,14 @@ class ValueTypes(BetterEnum):
 
 
 class RewardTypes(BetterEnum):
+    """Types of rewards given out by the major order/assignments."""
+
     MEDALS = 1
 
 
 class AssignmentTypes(BetterEnum):
+    """Types of assignments."""
+
     ERADICATE = 3
     LIBERATION = 11
     DEFENSE = 12

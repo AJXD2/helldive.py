@@ -1,0 +1,115 @@
+# mkdocs.yml
+site_name: Helldive.py
+site_description: Docs for the helldive.py library.
+site_author: AJXD2
+site_url: https://ajxd2.github.io/helldive.py/
+
+repo_name: ajxd2/helldive.py
+repo_url: https://github.com/ajxd2/helldive.py
+
+
+theme: 
+  name: material
+  logo: images/favicon.png
+    
+  language: en
+  features:
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.sections
+    - navigation.tracking
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - navigation.tabs
+    - content.code.copy
+    - content.code.select
+  palette:
+    scheme: slate
+    primary: teal
+    accent: teal
+  favicon: images/favicon.png
+
+
+extra:
+  consent:
+    title: Cookie consent
+    description: >- 
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+  analytics:
+    provider: google
+    property: G-YS5CTZLJFE
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ajxd2
+    - icon: fontawesome/brands/youtube
+      link: https://youtube.com/@ajxd2
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/u/ajxd2
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/helldivepy/
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - admonition
+  - footnotes
+  - codehilite
+  - pymdownx.snippets
+  - pymdownx.inlinehilite
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
+  - pymdownx.tabbed:
+      alternate_style: true
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: [./] 
+          options:
+            members: true
+            members_order: source
+            show_source: true
+            show_root_heading: true
+            show_root_full_path: true
+            show_root_members_full_path: true
+            show_object_full_path: true
+            show_category_heading: true
+            show_if_no_docstring: true
+            filters:
+              - "!^_"  
+              - "!^__"  
+            docstring_section_style: spacy
+            merge_init_into_class: true
+            show_signature: true
+            show_signature_annotations: true
+            separate_signature: true
+            docstring_style: google
+nav:
+  - Home:
+    - Introduction: index.md 
+    - Installation: installation.md
+    - Links: links.md
+  - API Reference:
+      - Overview: api/index.md
+      - Helldive.py:
+          - api/constants.md
+          - api/enums.md
+          - api/models.md
+          - api/routes.md
+          - api/utils.md
+      

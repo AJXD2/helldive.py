@@ -13,9 +13,7 @@ def hdml_to_md(text: str) -> str:
     Returns:
         str: The input string converted to Markdown format.
 
-    Example:
-        >>> hdml_to_md("<i=3>Hello</i=3> <i=1>World</i=1>")
-        "[b]Hello[/b] [yellow]World[/yellow]"
+
     """
 
     pattern = r"<i=(\d+)>(.*?)<\/i(?:=\1)?>"
