@@ -23,7 +23,7 @@ documentation = "https://github.com/ajxd2/helldive.py#readme"
 python = "^3.11"
 requests = "^2.32.3"
 fire = "^0.7.0"
-rich = "^13.9.4"
+rich = ">=13.9.4,<15.0.0"
 pydantic = "^2.10.3"
 [tool.poetry.dev-dependencies]
 black = "^24.10.0"
