@@ -1,9 +1,11 @@
-[tool.poetry]
+[project]
 name = "helldivepy"
 version = "0.1.1"
 description = "A Helldivers 2 API wrapper using the Diveharder API and the Helldivers Community API"
-authors = ["AJXD2 <aj@ajxd2.dev>"]
-license = "MIT"
+authors = [
+    {name = "AJXD2", email = "aj@ajxd2.dev"}
+]
+license = {text = "MIT"}
 readme = "README.md"
 keywords = ["helldivers 2", "api", "wrapper", "diveharder", "community"]
 classifiers = [
@@ -13,30 +15,32 @@ classifiers = [
     "Topic :: System :: Networking",
     "Typing :: Typed",
 ]
+requires-python = ">=3.11"
+dependencies = [
+    "requests>=2.32.3",
+    "fire>=0.7.0",
+    "rich>=13.9.4,<15.0.0",
+    "pydantic>=2.10.3",
+]
 
-[tool.poetry.urls]
-homepage = "https://github.com/ajxd2/helldive.py"
-repository = "https://github.com/ajxd2/helldive.py"
-documentation = "https://github.com/ajxd2/helldive.py#readme"
+[project.optional-dependencies]
+dev = [
+    "black>=25.1.0",
+    "flake8>=7.1.1",
+]
+docs = [
+    "mkdocs>=1.6.1",
+    "mkdocstrings[python]>=0.27,<0.30",
+    "mkdocs-material>=9.5.49",
+    "pygments>=2.18.0",
+    "pymdown-extensions>=10.12",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-requests = "^2.32.3"
-fire = "^0.7.0"
-rich = ">=13.9.4,<15.0.0"
-pydantic = "^2.10.3"
-[tool.poetry.dev-dependencies]
-black = "^25.1.0"
-flake8 = "^7.1.1"
-
-
-[tool.poetry.group.dev.dependencies]
-mkdocs = "^1.6.1"
-mkdocstrings = {extras = ["python"], version = ">=0.27,<0.30"}
-mkdocs-material = "^9.5.49"
-pygments = "^2.18.0"
-pymdown-extensions = "^10.12"
+[project.urls]
+Homepage = "https://github.com/ajxd2/helldive.py"
+Repository = "https://github.com/ajxd2/helldive.py"
+Documentation = "https://github.com/ajxd2/helldive.py#readme"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
