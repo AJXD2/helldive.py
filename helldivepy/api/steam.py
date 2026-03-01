@@ -20,7 +20,7 @@ class SteamModule(BaseApiModule):
 
     def get_all_steam_news(self) -> typing.List[models.SteamNews]:
         """
-        Gets the information about the current war.
+        Gets all Steam news/patch notes for the game.
         """
         data = self.get("community", "api", "v1", "steam")
 
@@ -28,7 +28,7 @@ class SteamModule(BaseApiModule):
 
     def get_steam_news(self, gid: str) -> models.SteamNews:
         """
-        Gets the information about the current war.
+        Gets a single Steam news item by its GID.
         """
         data = self.get("community", "api", "v1", "steam", gid)
         return models.SteamNews(**data)

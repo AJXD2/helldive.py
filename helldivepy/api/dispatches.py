@@ -20,7 +20,7 @@ class DispatchModule(BaseApiModule):
 
     def get_dispatches(self, old_to_new: bool = True) -> typing.List[models.Dispatch]:
         """
-        Gets the information about the current war.
+        Gets all dispatches (in-game news), ordered by publish date.
         """
 
         # Sort the dispatches by published date
@@ -34,7 +34,7 @@ class DispatchModule(BaseApiModule):
 
     def get_dispatch(self, dispatch_id: int) -> models.Dispatch:
         """
-        Gets the information about the current war.
+        Gets a single dispatch by its ID.
         """
         # Get the dispatch by the ID/Index
         data = self.get("community", "api", "v1", "dispatches", str(dispatch_id))

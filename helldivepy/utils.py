@@ -2,6 +2,14 @@ import re
 from helldivepy.constants import FACTIONS
 import helldivepy.enums as enums
 
+# HDML tag IDs used by the DiveHarder Markup Language
+_HDML_TAG_BOLD = "3"
+_HDML_TAG_YELLOW = "1"
+
+# Compiled once at import time for performance
+_HDML_INLINE_PATTERN = re.compile(r"<i=(\d+)>(.*?)<\/i(?:=\1)?>")
+_HDML_TAG_STRIP_PATTERN = re.compile(r"<\/?i(?:=\d+)?>")
+
 
 def hdml_to_md(text: str) -> str:
     """
@@ -16,19 +24,18 @@ def hdml_to_md(text: str) -> str:
 
     """
 
-    pattern = r"<i=(\d+)>(.*?)<\/i(?:=\1)?>"
-    matches = re.findall(pattern, text)
+    matches = _HDML_INLINE_PATTERN.findall(text)
 
     modified_text = text
     for match in matches:
-        if match[0] == "3":
+        if match[0] == _HDML_TAG_BOLD:
             modified_text = modified_text.replace(match[1], f"[b]{match[1]}[/b]")
-        elif match[0] == "1":
+        elif match[0] == _HDML_TAG_YELLOW:
             modified_text = modified_text.replace(
                 match[1], f"[yellow]{match[1]}[/yellow]"
             )
 
-    modified_text = re.sub(r"<\/?i(?:=\d+)?>", "", modified_text)
+    modified_text = _HDML_TAG_STRIP_PATTERN.sub("", modified_text)
 
     return modified_text
 

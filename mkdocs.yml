@@ -79,7 +79,7 @@ plugins:
       default_handler: python
       handlers:
         python:
-          paths: [./] 
+          paths: [helldivepy]
           options:
             members: true
             members_order: source
