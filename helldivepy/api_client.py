@@ -8,7 +8,7 @@ import helldivepy.api as modules
 
 
 def retry_adapter(
-    backoff_factor: float, retries: int, extra_retry_codes: list | None = None
+    backoff_factor: float, retries: int, extra_retry_codes: list[int] | None = None
 ) -> HTTPAdapter:
     """Configures an HTTP adapter with retries and backoff."""
     if extra_retry_codes is None:
@@ -28,7 +28,7 @@ def set_logger(debug: bool) -> logging.Logger:
     from rich.logging import RichHandler
 
     logger = logging.getLogger(__name__)
-    logger.level = logging.DEBUG if debug else 5000
+    logger.level = logging.DEBUG if debug else logging.CRITICAL + 1
     if debug:
         logger.addHandler(
             RichHandler(
