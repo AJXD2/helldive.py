@@ -41,10 +41,9 @@ class PlanetsModule(BaseApiModule):
             models.Planet: The planet object
         """
         if cached:
-            if len(self._planets) < index:
+            if index >= len(self._planets):
                 self.logger.warning(f"Planet {index} not cached. Fetching from API.")
                 self.get_planets()
-                return self._planets[index]
             return self._planets[index]
         data = self.get("community", "api", "v1", "planets", str(index))
         return models.Planet(**data)
