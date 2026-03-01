@@ -20,15 +20,15 @@ class SpaceStationModule(BaseApiModule):
         data = self.get("community", "api", "v1", "space-stations")
         return [models.SpaceStation(**item) for item in data]
 
-    def get_space_station(self, index: int) -> Optional[models.SpaceStation]:
+    def get_space_station(self, station_id: int) -> Optional[models.SpaceStation]:
         """
         Retrieves a space station by its ID.
 
         Args:
-            index (int): The ID of the space station.
+            station_id (int): The ID of the space station.
 
         Returns:
             Optional[SpaceStation]: The space station object if found, or None.
         """
-        data = self.get("community", "api", "v1", "space", "stations", str(index))
+        data = self.get("community", "api", "v1", "space-stations", str(station_id))
         return models.SpaceStation(**data) if data else None

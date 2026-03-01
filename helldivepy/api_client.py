@@ -1,4 +1,5 @@
 import logging
+import warnings
 import requests
 from requests.adapters import HTTPAdapter, Retry
 from helldivepy.constants import OFFICIAL_DIVEHARDER_URL, OFFICIAL_COMMUNITY_URL
@@ -65,6 +66,12 @@ class ApiClient:
         if cls._instance is None:
             cls._instance = super(ApiClient, cls).__new__(cls)
             cls._instance.__init__(*args, **kwargs)
+        else:
+            warnings.warn(
+                "ApiClient is a singleton. The existing instance will be returned; "
+                "new constructor arguments are ignored.",
+                stacklevel=2,
+            )
         return cls._instance
 
     @classmethod
