@@ -39,7 +39,7 @@ docs = [
 [project.urls]
 Homepage = "https://github.com/ajxd2/helldive.py"
 Repository = "https://github.com/ajxd2/helldive.py"
-Documentation = "https://github.com/ajxd2/helldive.py#readme"
+Documentation = "https://helldivepy.ajxd2.dev"
 
 [build-system]
 requires = ["hatchling"]
