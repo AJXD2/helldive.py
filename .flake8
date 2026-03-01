@@ -7,3 +7,4 @@ exclude =
     dist,
     *.egg-info
 max-line-length = 88
+extend-ignore = E501
