@@ -20,7 +20,7 @@ Run local versions of the APIs to avoid rate limiting from the hosted versions.
    cd api
    ```
 
-2. Edit the `src\Helldivers-2-API\appsettings.json` to your likig. Make sure you set the `ValidAudiences` to `["*"]` or else you will have problems. [More info](https://github.com/helldivers-2/api/blob/master/docs/containers.md#configuring-api-keys-for-the-self-hosted-version)
+2. Edit the `src/Helldivers-2-API/appsettings.json` to your liking. Make sure you set the `ValidAudiences` to `["*"]` or else you will have problems. [More info](https://github.com/helldivers-2/api/blob/master/docs/containers.md#configuring-api-keys-for-the-self-hosted-version)
 
    ```json
     {
@@ -51,7 +51,7 @@ Run local versions of the APIs to avoid rate limiting from the hosted versions.
     docker compose up -d helldivers-api 
     ```
 
-### [DiveHarder](https://github.com/helldivers-2/api)
+### [DiveHarder](https://github.com/helldivers-2/diveharder_api.py)
 
 1. Clone the repo and cd into it.
 
