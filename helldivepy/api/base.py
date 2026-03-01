@@ -36,6 +36,7 @@ class BaseApiModule:
             return {}
         except requests.exceptions.ConnectionError as e:
             self.logger.error(f"ConnectionError: {e}")
+            base = self.diveharder_url if url == "diveharder" else self.community_url
             raise DiveHarderAPIConnectionError(
-                f"Failed to connect to {self.diveharder_url if url == "diveharder" else self.community_url}. (Offline?)"
+                f"Failed to connect to {base}. (Offline?)"
             )
