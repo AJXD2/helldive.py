@@ -1,6 +1,7 @@
-from mkdocs.config.config_options import Optional
 from helldivepy.models import Dispatch
 from helldivepy.modules import BaseModule
+
+
 class DispatchesModule(BaseModule):
     def get_all(self) -> list[Dispatch]:
         resp = self._get("/v1/dispatches")

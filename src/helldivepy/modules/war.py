@@ -1,5 +1,7 @@
 from helldivepy.models import War
+
 from . import BaseModule
+
 
 class WarModule(BaseModule):
     def get(self) -> War:
