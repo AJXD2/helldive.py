@@ -1,7 +1,8 @@
-from helldivepy.enums import DispatchType
 from pydantic import BaseModel, ConfigDict, GetCoreSchemaHandler
 from pydantic.alias_generators import to_camel
 from pydantic_core import core_schema
+
+from helldivepy.enums import DispatchType, RegionSize
 
 
 # Convert snake_case to camelCase for JSON serialization.
@@ -25,7 +26,10 @@ class HDMLString:
         return f"HDMLString({self.content!r})"
 
     @classmethod
-    def __get_pydantic_core_schema__(cls, source_type, handler: GetCoreSchemaHandler):
+    def __get_pydantic_core_schema__(
+        cls, source_type: type, handler: GetCoreSchemaHandler
+    ):
+        # source_type and handler are required by the signature but not used
         return core_schema.no_info_plain_validator_function(
             lambda v: cls(v) if isinstance(v, str) else v,
             serialization=core_schema.to_string_ser_schema(),
@@ -33,8 +37,16 @@ class HDMLString:
 
     def to_md(self, use_classes: bool = False) -> str:
         if use_classes:
-            return self.content.replace("</i>", "</span>").replace("<i=1>", "<span class=\"text-yellow\">").replace("<i=3>", "<span class=\"text-bold\">")
-        return self.content.replace("</i>", "</span>").replace("<i=1>", "<span style=\"color: yellow\">").replace("<i=3>", "<span style=\"font-weight: bold\">")
+            return (
+                self.content.replace("</i>", "</span>")
+                .replace("<i=1>", '<span class="text-yellow">')
+                .replace("<i=3>", '<span class="text-bold">')
+            )
+        return (
+            self.content.replace("</i>", "</span>")
+            .replace("<i=1>", '<span style="color: yellow">')
+            .replace("<i=3>", '<span style="font-weight: bold">')
+        )
 
 
 class Statistics(APIModel):
@@ -70,3 +82,46 @@ class Dispatch(APIModel):
     published: str
     type: DispatchType
     message: HDMLString
+
+
+class Region(APIModel):
+    id: int
+    hash: int
+    name: str
+    description: str
+    health: int
+    max_health: int
+    size: RegionSize
+    regen_per_second: float
+    # Unknown purpose
+    availability_factor: float
+    is_available: bool
+    players: int
+
+
+class Biome(APIModel):
+    name: str
+    description: str
+
+
+class Hazard(APIModel):
+    name: str
+    description: str
+
+
+class Position(APIModel):
+    x: float
+    y: float
+
+
+class Planet(APIModel):
+    index: int
+    name: str
+    sector: str
+    biome: Biome
+    hazards: list[Hazard]
+    hash: int
+    position: Position
+    waypoints: list[int]
+    maxHealth: int
+    health: int

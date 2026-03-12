@@ -7,5 +7,13 @@ class Factions(enum.Enum):
     Automaton = "Automaton"
     Illuminate = "Illuminate"
 
+
 class DispatchType(enum.IntEnum):
     NORMAL = 0
+
+
+class RegionSize(enum.Enum):
+    Settlement = "Settlement"
+    Town = "Town"
+    City = "City"
+    MegaCity = "MegaCity"
