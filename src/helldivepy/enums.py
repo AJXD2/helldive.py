@@ -1,5 +1,6 @@
 import enum
 
+
 class Factions(enum.Enum):
     Humans = "Humans"
     Terminids = "Terminids"

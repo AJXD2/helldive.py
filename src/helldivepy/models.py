@@ -1,6 +1,7 @@
 from pydantic import BaseModel, ConfigDict
 from pydantic.alias_generators import to_camel
 
+
 # Convert snake_case to camelCase for JSON serialization.
 # This removes adding an extra step to the request methods while enforcing standards.
 class APIModel(BaseModel):
