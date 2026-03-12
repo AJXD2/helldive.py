@@ -6,3 +6,6 @@ class Factions(enum.Enum):
     Terminids = "Terminids"
     Automaton = "Automaton"
     Illuminate = "Illuminate"
+
+class DispatchType(enum.IntEnum):
+    NORMAL = 0

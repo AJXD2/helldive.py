@@ -17,8 +17,3 @@ class BaseModule:
         response = self._client.client.get(self._url(path), headers=self._client.headers, **kwargs)
         response.raise_for_status()
         return response.json()
-
-    async def _aget(self, path: str, **kwargs):
-        response = await self._client.async_client.get(self._url(path), headers=self._client.headers, **kwargs)
-        response.raise_for_status()
-        return response.json()
