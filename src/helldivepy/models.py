@@ -1,8 +1,10 @@
+from datetime import datetime
+
 from pydantic import BaseModel, ConfigDict, GetCoreSchemaHandler
 from pydantic.alias_generators import to_camel
 from pydantic_core import core_schema
 
-from helldivepy.enums import DispatchType, RegionSize
+from helldivepy.enums import DispatchType, Factions, RegionSize
 
 
 # Convert snake_case to camelCase for JSON serialization.
@@ -68,9 +70,9 @@ class Statistics(APIModel):
 
 
 class War(APIModel):
-    started: str
-    ended: str
-    now: str
+    started: datetime
+    ended: datetime
+    now: datetime
     client_version: str
     factions: list[str]
     impact_multiplier: float
@@ -87,14 +89,14 @@ class Dispatch(APIModel):
 class Region(APIModel):
     id: int
     hash: int
-    name: str
-    description: str
-    health: int
+    name: str | None = None
+    description: str | None = None
+    health: int | None = None
     max_health: int
     size: RegionSize
-    regen_per_second: float
+    regen_per_second: float | None = None
     # Unknown purpose
-    availability_factor: float
+    availability_factor: float | None = None
     is_available: bool
     players: int
 
@@ -114,6 +116,18 @@ class Position(APIModel):
     y: float
 
 
+class Event(APIModel):
+    id: int
+    event_type: int
+    faction: Factions
+    health: int
+    max_health: int
+    start_time: datetime
+    end_time: datetime
+    campaign_id: int
+    joint_operation_ids: list[int]
+
+
 class Planet(APIModel):
     index: int
     name: str
@@ -123,5 +137,26 @@ class Planet(APIModel):
     hash: int
     position: Position
     waypoints: list[int]
-    maxHealth: int
+    max_health: int
     health: int
+    disabled: bool
+    initial_owner: Factions
+    current_owner: Factions
+    regen_per_second: float
+    event: Event | None = None
+    statistics: Statistics
+    attacking: list[int]
+    regions: list[Region]
+
+
+class Campaign(APIModel):
+    id: int
+    planet: Planet
+    type: int
+    count: int
+    faction: Factions
+
+
+class HomeWorld(APIModel):
+    race: int
+    planet_indices: list[int]

@@ -55,8 +55,7 @@ All models extend `APIModel` (in `models.py`), which configures Pydantic with au
 |---|---|
 | `src/helldivepy/client.py` | `HelldiveAPIClient` — main entry point, auto-registers modules |
 | `src/helldivepy/modules/__init__.py` | `BaseModule` abstract base |
-| `src/helldivepy/modules/dispatches.py` | Dispatches API |
-| `src/helldivepy/modules/war.py` | War status API |
+| `src/helldivepy/modules/[module_name].py` | Specific module implementation |
 | `src/helldivepy/models.py` | All Pydantic models + `HDMLString` |
 | `src/helldivepy/enums.py` | Game enumerations (`Factions`, `DispatchType`, `RegionSize`) |
 
