@@ -1,10 +1,10 @@
 from datetime import datetime
 
-from pydantic import BaseModel, ConfigDict, GetCoreSchemaHandler
+from pydantic import BaseModel, ConfigDict, GetCoreSchemaHandler, model_validator
 from pydantic.alias_generators import to_camel
 from pydantic_core import core_schema
 
-from helldivepy.enums import DispatchType, Factions, RegionSize
+from helldivepy.enums import DispatchType, Factions, RegionSize, TaskType, TaskValueType
 
 
 # Convert snake_case to camelCase for JSON serialization.
@@ -160,3 +160,71 @@ class Campaign(APIModel):
 class HomeWorld(APIModel):
     race: int
     planet_indices: list[int]
+
+
+class Task(APIModel):
+    type: TaskType | int
+    # valueType → value, keyed by TaskValueType where known
+    values: dict[TaskValueType | int, int]
+    # Raw progress value injected by Assignment during validation
+    progress: int = 0
+
+    @model_validator(mode="before")
+    @classmethod
+    def zip_values(cls, data: dict[str, object]) -> dict[str, object]:
+        raw_values: list[int] = data.get("values", [])  # type: ignore[assignment]
+        raw_types: list[int] = data.get("valueTypes") or data.get("value_types", [])  # type: ignore[assignment]
+        if raw_values and raw_types:
+            data["values"] = {
+                TaskValueType(t) if t in TaskValueType._value2member_map_ else t: v
+                for t, v in zip(raw_types, raw_values, strict=False)
+            }
+        return data
+
+    @property
+    def goal(self) -> int | None:
+        """The target value for this task (kill count, liberation %, etc.)"""
+        return self.values.get(TaskValueType.GOAL)
+
+    @property
+    def progress_perc(self) -> float | None:
+        """Progress towards goal as a percentage (0.0–100.0), or None if not applicable."""  # noqa: E501
+        goal = self.goal
+        if goal is None or goal == 0:
+            return None
+        return min(self.progress / goal * 100, 100.0)
+
+    @property
+    def is_liberation_task(self) -> bool:
+        """Liberation/defense tasks track progress via Campaign health, not Assignment.progress."""  # noqa: E501
+        return self.type in (
+            TaskType.SUCCEED_IN_DEFENSE,
+            TaskType.LIBERATE_PLANET,
+            TaskType.EARN_MEDALS,
+            TaskType.EXTRACT_WITH_ITEM,
+            TaskType.COMPLETE_MISSIONS,
+        )
+
+
+class Reward(APIModel):
+    type: int
+    amount: int
+
+
+class Assignment(APIModel):
+    id: int
+    progress: list[int]
+    title: str
+    briefing: str
+    description: str | None = None
+    tasks: list[Task]
+    reward: Reward | None = None
+    rewards: list[Reward]
+    expiration: datetime
+    flags: int
+
+    @model_validator(mode="after")
+    def inject_task_progress(self) -> "Assignment":
+        for i, task in enumerate(self.tasks):
+            task.progress = self.progress[i] if i < len(self.progress) else 0
+        return self
