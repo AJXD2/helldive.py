@@ -49,6 +49,21 @@ All models extend `APIModel` (in `models.py`), which configures Pydantic with au
 
 `HDMLString` is a custom type wrapping the game's HDML markup language, with `to_md()` for converting to Markdown.
 
+
+#### Task parsing
+
+`Task.values` is parsed from the raw parallel `values`/`valueTypes` arrays into `dict[TaskValueType | int, int]` keyed by `TaskValueType` where known. Unknown value type codes are kept as raw `int`.
+
+`Assignment.inject_task_progress` injects each task's progress from `Assignment.progress[i]` during validation, enabling `Task.progress_perc` and `Task.goal`.
+
+#### Community-reverse-engineered enums
+
+`TaskType` and `TaskValueType` in `enums.py` are based on community research and may be incomplete. Unknown task types fall back to raw `int`.
+
+### API endpoints 
+
+The live API requires `X-Super-Client` and `X-Super-Contact` headers.
+
 ### Key Files
 
 | File | Purpose |
@@ -57,7 +72,9 @@ All models extend `APIModel` (in `models.py`), which configures Pydantic with au
 | `src/helldivepy/modules/__init__.py` | `BaseModule` abstract base |
 | `src/helldivepy/modules/[module_name].py` | Specific module implementation |
 | `src/helldivepy/models.py` | All Pydantic models + `HDMLString` |
-| `src/helldivepy/enums.py` | Game enumerations (`Factions`, `DispatchType`, `RegionSize`) |
+| `src/helldivepy/enums.py` | Game enumerations |
+| `tests/conftest.py` | Shared pytest fixtures (raw API-shaped dicts) |
+| `tests/test_models.py` | Model parsing and validation tests |
 
 ### Tooling
 

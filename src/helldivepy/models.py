@@ -174,11 +174,14 @@ class Task(APIModel):
     def zip_values(cls, data: dict[str, object]) -> dict[str, object]:
         raw_values: list[int] = data.get("values", [])  # type: ignore[assignment]
         raw_types: list[int] = data.get("valueTypes") or data.get("value_types", [])  # type: ignore[assignment]
-        if raw_values and raw_types:
-            data["values"] = {
+        data["values"] = (
+            {
                 TaskValueType(t) if t in TaskValueType._value2member_map_ else t: v
                 for t, v in zip(raw_types, raw_values, strict=False)
             }
+            if raw_values and raw_types
+            else {}
+        )
         return data
 
     @property
