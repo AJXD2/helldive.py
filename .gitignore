@@ -166,3 +166,4 @@ cython_debug/
 main.py
 # Local claude config override
 .claude/settings.local.json
+tmp/*

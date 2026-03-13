@@ -10,3 +10,12 @@ repos:
     rev: v1.1.408
     hooks:
       - id: pyright
+
+  - repo: local
+    hooks:
+      - id: run_tests
+        language: system
+        name: Run tests
+        entry: uv run pytest
+        pass_filenames: false
+        stages: [pre-commit]
