@@ -1,14 +1,20 @@
-from helldivepy.models import Planet
+import httpx
 
-from . import BaseModule
+from helldivepy.models import Event, Planet
+from helldivepy.modules import BaseModule
 
 
 class PlanetModule(BaseModule):
     def get_all(self) -> list[Planet]:
-        return [Planet(**planet_data) for planet_data in self._get("/v1/planets")]
+        return [Planet.model_validate(p) for p in self._get("/v1/planets")]
 
-    def get(self, id: int) -> Planet | None:
+    def get(self, index: int) -> Planet | None:
         try:
-            return Planet(**self._get(f"/v1/planets/{id}"))
-        except Exception:
-            return None
+            return Planet.model_validate(self._get(f"/v1/planets/{index}"))
+        except httpx.HTTPStatusError as e:
+            if e.response.status_code == 404:
+                return None
+            raise
+
+    def get_events(self) -> list[Event]:
+        return [Event.model_validate(e) for e in self._get("/v1/planet-events")]
