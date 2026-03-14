@@ -4,12 +4,14 @@ import httpx
 
 from helldivepy.modules import BaseModule
 from helldivepy.modules.dispatches import DispatchesModule
+from helldivepy.modules.planets import PlanetModule
 from helldivepy.modules.war import WarModule
 
 
 class HelldiveAPIClient:
     war: WarModule
     dispatches: DispatchesModule
+    planets: PlanetModule
 
     def __init__(
         self,
