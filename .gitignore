@@ -166,4 +166,5 @@ cython_debug/
 main.py
 # Local claude config override
 .claude/settings.local.json
+# TODO: Remove before v1.0.0
 tmp/*
