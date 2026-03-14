@@ -5,6 +5,4 @@ from . import BaseModule
 
 class WarModule(BaseModule):
     def get(self) -> War:
-        resp = self._get("/v1/war")
-        war = War(**resp)
-        return war
+        return War.model_validate(self._get("/v1/war"))
