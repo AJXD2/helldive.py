@@ -3,6 +3,7 @@ from typing import get_type_hints
 import httpx
 
 from helldivepy.modules import BaseModule
+from helldivepy.modules.assignments import AssignmentsModule
 from helldivepy.modules.dispatches import DispatchesModule
 from helldivepy.modules.planets import PlanetModule
 from helldivepy.modules.war import WarModule
@@ -12,6 +13,7 @@ class HelldiveAPIClient:
     war: WarModule
     dispatches: DispatchesModule
     planets: PlanetModule
+    assignments: AssignmentsModule
 
     def __init__(
         self,
