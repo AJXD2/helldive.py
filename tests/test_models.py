@@ -24,6 +24,7 @@ from helldivepy.models import (
     Reward,
     SpaceStation,
     Statistics,
+    SteamNews,
     TacticalAction,
     Task,
     War,
@@ -390,3 +391,25 @@ class TestSpaceStation:
         assert len(ss.tactical_actions) == 1
         assert isinstance(ss.tactical_actions[0], TacticalAction)
         assert ss.tactical_actions[0].name == "EAGLE STORM"
+
+
+# ---------------------------------------------------------------------------
+# SteamNews
+# ---------------------------------------------------------------------------
+
+
+class TestSteamNews:
+    def test_fields_parsed(self, raw_steam_news: dict) -> None:  # type: ignore[type-arg]
+        s = SteamNews.model_validate(raw_steam_news)
+        assert s.id == "123456"
+        assert s.title == "Wowzers"
+        assert s.author == "The Baskinator"
+        assert (
+            s.url
+            == "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/123456"
+        )
+
+    def test_published_at_is_datetime(self, raw_steam_news: dict) -> None:  # type: ignore[type-arg]
+        s = SteamNews.model_validate(raw_steam_news)
+        assert isinstance(s.published_at, datetime)
+        assert s.published_at.tzinfo is not None

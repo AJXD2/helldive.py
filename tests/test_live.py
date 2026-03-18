@@ -17,6 +17,7 @@ from helldivepy.models import (
     Event,
     Planet,
     SpaceStation,
+    SteamNews,
     War,
 )
 
@@ -227,3 +228,29 @@ class TestLiveSpaceStationsModule:
             pytest.skip("No space stations available.")
         for station in stations:
             assert isinstance(station.planet, Planet)
+
+
+# ---------------------------------------------------------------------------
+# Steam
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.live
+class TestLiveSteamModule:
+    def test_get_all_returns_list(self, live_client: HelldiveAPIClient) -> None:
+        news = live_client.steam.get_all()
+        assert isinstance(news, list)
+        for item in news:
+            assert isinstance(item, SteamNews)
+
+    def test_get_first_by_id(self, live_client: HelldiveAPIClient) -> None:
+        news = live_client.steam.get_all()
+        if not news:
+            pytest.skip("No steam news available.")
+        first = live_client.steam.get(news[0].id)
+        assert isinstance(first, SteamNews)
+        assert first.id == news[0].id
+
+    def test_get_nonexistent_returns_none(self, live_client: HelldiveAPIClient) -> None:
+        result = live_client.steam.get("000000000000000")
+        assert result is None

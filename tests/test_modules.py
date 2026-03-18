@@ -13,6 +13,7 @@ from helldivepy.models import (
     Event,
     Planet,
     SpaceStation,
+    SteamNews,
     War,
 )
 
@@ -435,3 +436,62 @@ class TestSpaceStationsModule:
         )
         with pytest.raises(httpx.HTTPStatusError):
             client.spacestations.get(1)
+
+
+# ---------------------------------------------------------------------------
+# SteamModule
+# ---------------------------------------------------------------------------
+
+
+class TestSteamModule:
+    def test_get_all_returns_list(
+        self,
+        client: HelldiveAPIClient,
+        respx_mock: respx.MockRouter,
+        raw_steam_news: dict,  # type: ignore[type-arg]
+    ) -> None:
+        respx_mock.get(f"{BASE_URL}/v1/steam").mock(
+            return_value=httpx.Response(200, json=[raw_steam_news])
+        )
+        result = client.steam.get_all()
+        assert len(result) == 1
+        assert isinstance(result[0], SteamNews)
+        assert result[0].id == "123456"
+
+    def test_get_all_empty_list(
+        self, client: HelldiveAPIClient, respx_mock: respx.MockRouter
+    ) -> None:
+        respx_mock.get(f"{BASE_URL}/v1/steam").mock(
+            return_value=httpx.Response(200, json=[])
+        )
+        assert client.steam.get_all() == []
+
+    def test_get_returns_steam_news(
+        self,
+        client: HelldiveAPIClient,
+        respx_mock: respx.MockRouter,
+        raw_steam_news: dict,  # type: ignore[type-arg]
+    ) -> None:
+        respx_mock.get(f"{BASE_URL}/v1/steam/123456").mock(
+            return_value=httpx.Response(200, json=raw_steam_news)
+        )
+        result = client.steam.get("123456")
+        assert isinstance(result, SteamNews)
+        assert result.title == "Wowzers"
+
+    def test_get_returns_none_on_404(
+        self, client: HelldiveAPIClient, respx_mock: respx.MockRouter
+    ) -> None:
+        respx_mock.get(f"{BASE_URL}/v1/steam/999").mock(
+            return_value=httpx.Response(404)
+        )
+        assert client.steam.get("999") is None
+
+    def test_get_reraises_non_404_errors(
+        self, client: HelldiveAPIClient, respx_mock: respx.MockRouter
+    ) -> None:
+        respx_mock.get(f"{BASE_URL}/v1/steam/123456").mock(
+            return_value=httpx.Response(500)
+        )
+        with pytest.raises(httpx.HTTPStatusError):
+            client.steam.get("123456")

@@ -212,6 +212,15 @@ ASSIGNMENT = {
     "flags": 0,
 }
 
+STEAM_NEWS = {
+    "id": "123456",
+    "title": "Wowzers",
+    "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/123456",
+    "author": "The Baskinator",
+    "content": "[p][b]Blah Blah update something something oh well.[/b][/p]",
+    "publishedAt": "2026-03-17T14:18:19Z",
+}
+
 
 @pytest.fixture
 def raw_statistics() -> dict:  # type: ignore[type-arg]
@@ -291,3 +300,8 @@ def raw_tactical_action() -> dict:  # type: ignore[type-arg]
 @pytest.fixture
 def raw_spacestation() -> dict:  # type: ignore[type-arg]
     return copy.deepcopy(SPACESTATION)
+
+
+@pytest.fixture
+def raw_steam_news() -> dict:  # type: ignore[type-arg]
+    return copy.deepcopy(STEAM_NEWS)
