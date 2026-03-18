@@ -10,6 +10,7 @@ from helldivepy.modules.campaigns import CampaignModule
 from helldivepy.modules.dispatches import DispatchesModuleV1, DispatchesModuleV2
 from helldivepy.modules.planets import PlanetModule
 from helldivepy.modules.space_stations import SpaceStationsModule
+from helldivepy.modules.steam import SteamModule
 from helldivepy.modules.war import WarModule
 
 
@@ -21,6 +22,7 @@ class HelldiveAPIClient:
     assignments: AssignmentsModule
     campaigns: CampaignModule
     spacestations: SpaceStationsModule
+    steam: SteamModule
 
     def __init__(
         self,

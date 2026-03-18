@@ -276,3 +276,12 @@ class SpaceStation(APIModel):
     election_end: datetime
     flags: int
     tactical_actions: list[TacticalAction]
+
+
+class SteamNews(APIModel):
+    id: str
+    title: str
+    url: str
+    author: str
+    content: str
+    published_at: datetime
