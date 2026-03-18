@@ -4,15 +4,31 @@ Run with: uv run pytest --live
 These tests make real HTTP requests and require a network connection.
 """
 
+import time
+
 import pytest
 
 from helldivepy.client import HelldiveAPIClient
-from helldivepy.models import Assignment, Campaign, Dispatch, Event, Planet, War
+from helldivepy.models import (
+    Assignment,
+    Campaign,
+    Dispatch,
+    Event,
+    Planet,
+    SpaceStation,
+    War,
+)
 
 
 @pytest.fixture(scope="module")
 def live_client() -> HelldiveAPIClient:
     return HelldiveAPIClient()
+
+
+# API limit: 5 requests per 10 seconds. Sleep between tests to avoid 429s.
+@pytest.fixture(autouse=True)
+def rate_limit_sleep() -> None:
+    time.sleep(2.5)
 
 
 # ---------------------------------------------------------------------------
@@ -154,3 +170,38 @@ class TestLiveCampaignModule:
         for campaign in campaigns:
             assert isinstance(campaign.planet, Planet)
             assert campaign.planet.name
+
+
+# ---------------------------------------------------------------------------
+# SpaceStations
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.live
+class TestLiveSpaceStationsModule:
+    def test_get_all_returns_list(self, live_client: HelldiveAPIClient) -> None:
+        stations = live_client.spacestations.get_all()
+        assert isinstance(stations, list)
+        for s in stations:
+            assert isinstance(s, SpaceStation)
+
+    def test_get_first_by_id(self, live_client: HelldiveAPIClient) -> None:
+        stations = live_client.spacestations.get_all()
+        if not stations:
+            pytest.skip("No space stations available.")
+        first = live_client.spacestations.get(stations[0].id32)
+        assert isinstance(first, SpaceStation)
+        assert first.id32 == stations[0].id32
+
+    def test_get_nonexistent_returns_none(self, live_client: HelldiveAPIClient) -> None:
+        result = live_client.spacestations.get(999999999)
+        assert result is None
+
+    def test_spacestation_has_nested_planet(
+        self, live_client: HelldiveAPIClient
+    ) -> None:
+        stations = live_client.spacestations.get_all()
+        if not stations:
+            pytest.skip("No space stations available.")
+        for station in stations:
+            assert isinstance(station.planet, Planet)

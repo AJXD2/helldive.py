@@ -143,6 +143,55 @@ LIBERATE_TASK = {
     "valueTypes": [3, 11, 12],
 }
 
+COST = {
+    "id": "ce60caf8-d89e-ef11-88d0-002248533197",
+    "itemMixId": 3992382197,
+    "targetValue": 86400,
+    "currentValue": 0.0,
+    "deltaPerSecond": 1.0,
+    "maxDonationAmmount": 0,
+    "maxDonationPeriodSeconds": 86400,
+}
+
+TACTICAL_ACTION = {
+    "id32": 4091660627,
+    "mediaId32": 4091660627,
+    "name": "EAGLE STORM",
+    "description": "DSS crews maintain deployment of a 24-hour rotating fleet of Eagle Fighters.",  # noqa: E501
+    "strategicDescription": '<span data-ah="1">Eagle Airstrikes</span> during missions.',  # noqa: E501
+    "status": 3,
+    "statusExpire": "2026-03-22T10:58:36Z",
+    "costs": [COST],
+    "effectIds": [1209, 1212, 1216],
+}
+
+SPACESTATION_PLANET = {
+    **PLANET,
+    "regions": [
+        {
+            "id": 0,
+            "hash": 2634421583,
+            "name": "TIMELY",
+            "description": "null",
+            "health": 166603,
+            "maxHealth": 200000,
+            "size": "Town",
+            "regenPerSecond": 0.5555556,
+            "availabilityFactor": 0.57968,
+            "isAvailable": True,
+            "players": 2513,
+        }
+    ],
+}
+
+SPACESTATION = {
+    "id32": 749875195,
+    "planet": SPACESTATION_PLANET,
+    "electionEnd": "2026-03-18T20:56:46Z",
+    "flags": 1,
+    "tacticalActions": [TACTICAL_ACTION],
+}
+
 ASSIGNMENT = {
     "id": 9001,
     "progress": [50000, 0],
@@ -215,3 +264,18 @@ def raw_liberate_task() -> dict:  # type: ignore[type-arg]
 @pytest.fixture
 def raw_assignment() -> dict:  # type: ignore[type-arg]
     return copy.deepcopy(ASSIGNMENT)
+
+
+@pytest.fixture
+def raw_cost() -> dict:  # type: ignore[type-arg]
+    return copy.deepcopy(COST)
+
+
+@pytest.fixture
+def raw_tactical_action() -> dict:  # type: ignore[type-arg]
+    return copy.deepcopy(TACTICAL_ACTION)
+
+
+@pytest.fixture
+def raw_spacestation() -> dict:  # type: ignore[type-arg]
+    return copy.deepcopy(SPACESTATION)

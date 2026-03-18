@@ -12,6 +12,7 @@ from helldivepy.models import (
     Assignment,
     Biome,
     Campaign,
+    Cost,
     Dispatch,
     Event,
     Hazard,
@@ -21,7 +22,9 @@ from helldivepy.models import (
     Position,
     Region,
     Reward,
+    SpaceStation,
     Statistics,
+    TacticalAction,
     Task,
     War,
 )
@@ -316,3 +319,74 @@ class TestAssignment:
         assert isinstance(a.reward, Reward)
         assert a.reward.type == 1
         assert a.reward.amount == 50
+
+
+# ---------------------------------------------------------------------------
+# Cost
+# ---------------------------------------------------------------------------
+
+
+class TestCost:
+    def test_fields_parsed(self, raw_cost: dict) -> None:  # type: ignore[type-arg]
+        c = Cost.model_validate(raw_cost)
+        assert c.id == "ce60caf8-d89e-ef11-88d0-002248533197"
+        assert c.item_mix_id == 3992382197
+        assert c.target_value == 86400
+        assert c.current_value == 0.0
+        assert c.delta_per_second == 1.0
+        assert c.max_donation_ammount == 0
+        assert c.max_donation_period_seconds == 86400
+
+
+# ---------------------------------------------------------------------------
+# TacticalAction
+# ---------------------------------------------------------------------------
+
+
+class TestTacticalAction:
+    def test_fields_parsed(self, raw_tactical_action: dict) -> None:  # type: ignore[type-arg]
+        ta = TacticalAction.model_validate(raw_tactical_action)
+        assert ta.id32 == 4091660627
+        assert ta.media_id32 == 4091660627
+        assert ta.name == "EAGLE STORM"
+        assert ta.status == 3
+        assert ta.effect_ids == [1209, 1212, 1216]
+
+    def test_status_expire_is_datetime(self, raw_tactical_action: dict) -> None:  # type: ignore[type-arg]
+        ta = TacticalAction.model_validate(raw_tactical_action)
+        assert isinstance(ta.status_expire, datetime)
+        assert ta.status_expire.tzinfo is not None
+
+    def test_costs_parsed(self, raw_tactical_action: dict) -> None:  # type: ignore[type-arg]
+        ta = TacticalAction.model_validate(raw_tactical_action)
+        assert len(ta.costs) == 1
+        assert isinstance(ta.costs[0], Cost)
+        assert ta.costs[0].target_value == 86400
+
+
+# ---------------------------------------------------------------------------
+# SpaceStation
+# ---------------------------------------------------------------------------
+
+
+class TestSpaceStation:
+    def test_fields_parsed(self, raw_spacestation: dict) -> None:  # type: ignore[type-arg]
+        ss = SpaceStation.model_validate(raw_spacestation)
+        assert ss.id32 == 749875195
+        assert ss.flags == 1
+
+    def test_election_end_is_datetime(self, raw_spacestation: dict) -> None:  # type: ignore[type-arg]
+        ss = SpaceStation.model_validate(raw_spacestation)
+        assert isinstance(ss.election_end, datetime)
+        assert ss.election_end.tzinfo is not None
+
+    def test_planet_parsed(self, raw_spacestation: dict) -> None:  # type: ignore[type-arg]
+        ss = SpaceStation.model_validate(raw_spacestation)
+        assert isinstance(ss.planet, Planet)
+        assert ss.planet.regions[0].name == "TIMELY"
+
+    def test_tactical_actions_parsed(self, raw_spacestation: dict) -> None:  # type: ignore[type-arg]
+        ss = SpaceStation.model_validate(raw_spacestation)
+        assert len(ss.tactical_actions) == 1
+        assert isinstance(ss.tactical_actions[0], TacticalAction)
+        assert ss.tactical_actions[0].name == "EAGLE STORM"

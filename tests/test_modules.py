@@ -5,7 +5,15 @@ import pytest
 import respx
 
 from helldivepy.client import HelldiveAPIClient
-from helldivepy.models import Assignment, Campaign, Dispatch, Event, Planet, War
+from helldivepy.models import (
+    Assignment,
+    Campaign,
+    Dispatch,
+    Event,
+    Planet,
+    SpaceStation,
+    War,
+)
 
 BASE_URL = "https://api.helldivers2.dev/api"
 
@@ -308,3 +316,62 @@ class TestCampaignModule:
         )
         with pytest.raises(httpx.HTTPStatusError):
             client.campaigns.get(1)
+
+
+# ---------------------------------------------------------------------------
+# SpaceStationsModule
+# ---------------------------------------------------------------------------
+
+
+class TestSpaceStationsModule:
+    def test_get_all_returns_list(
+        self,
+        client: HelldiveAPIClient,
+        respx_mock: respx.MockRouter,
+        raw_spacestation: dict,  # type: ignore[type-arg]
+    ) -> None:
+        respx_mock.get(f"{BASE_URL}/v2/space-stations").mock(
+            return_value=httpx.Response(200, json=[raw_spacestation])
+        )
+        result = client.spacestations.get_all()
+        assert len(result) == 1
+        assert isinstance(result[0], SpaceStation)
+        assert result[0].id32 == 749875195
+
+    def test_get_all_empty_list(
+        self, client: HelldiveAPIClient, respx_mock: respx.MockRouter
+    ) -> None:
+        respx_mock.get(f"{BASE_URL}/v2/space-stations").mock(
+            return_value=httpx.Response(200, json=[])
+        )
+        assert client.spacestations.get_all() == []
+
+    def test_get_returns_spacestation(
+        self,
+        client: HelldiveAPIClient,
+        respx_mock: respx.MockRouter,
+        raw_spacestation: dict,  # type: ignore[type-arg]
+    ) -> None:
+        respx_mock.get(f"{BASE_URL}/v2/space-stations/749875195").mock(
+            return_value=httpx.Response(200, json=raw_spacestation)
+        )
+        result = client.spacestations.get(749875195)
+        assert isinstance(result, SpaceStation)
+        assert result.id32 == 749875195
+
+    def test_get_returns_none_on_404(
+        self, client: HelldiveAPIClient, respx_mock: respx.MockRouter
+    ) -> None:
+        respx_mock.get(f"{BASE_URL}/v2/space-stations/999").mock(
+            return_value=httpx.Response(404)
+        )
+        assert client.spacestations.get(999) is None
+
+    def test_get_reraises_non_404_errors(
+        self, client: HelldiveAPIClient, respx_mock: respx.MockRouter
+    ) -> None:
+        respx_mock.get(f"{BASE_URL}/v2/space-stations/1").mock(
+            return_value=httpx.Response(503)
+        )
+        with pytest.raises(httpx.HTTPStatusError):
+            client.spacestations.get(1)
