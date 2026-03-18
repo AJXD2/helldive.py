@@ -4,7 +4,14 @@ from pydantic import BaseModel, ConfigDict, GetCoreSchemaHandler, model_validato
 from pydantic.alias_generators import to_camel
 from pydantic_core import core_schema
 
-from helldivepy.enums import DispatchType, Factions, RegionSize, TaskType, TaskValueType
+from helldivepy.enums import (
+    CampaignType,
+    DispatchType,
+    Factions,
+    RegionSize,
+    TaskType,
+    TaskValueType,
+)
 
 
 # Convert snake_case to camelCase for JSON serialization.
@@ -152,7 +159,7 @@ class Planet(APIModel):
 class Campaign(APIModel):
     id: int
     planet: Planet
-    type: int
+    type: CampaignType
     count: int
     faction: Factions
 
