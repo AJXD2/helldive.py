@@ -40,3 +40,13 @@ class TaskValueType(enum.IntEnum):
     PLANET_HASH = 4
     LIBERATE_STATE = 11
     PLANET_INDEX = 12
+
+
+class CampaignType(enum.IntEnum):
+    """
+    Community-reverse-engineered value type codes for Campaign.type. May be incomplete.
+    """
+
+    LIBERATION = 0
+    RECON = 1
+    STORY = 2
