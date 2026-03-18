@@ -58,10 +58,15 @@ class TestHDMLString:
 
     def test_pydantic_field_accepts_str(self) -> None:
         d = Dispatch.model_validate(
-            {"id": 1, "published": "2026-01-01", "type": 0, "message": "<i=1>Hi</i>"}
+            {
+                "id": 1,
+                "published": "2026-01-01",
+                "type": 0,
+                "message": '<span data-ah="1">Hi</span>',
+            }
         )
-        assert isinstance(d.message, HDMLString)
-        assert str(d.message) == "<i=1>Hi</i>"
+        assert isinstance(d.message, str)
+        assert d.message == '<span data-ah="1">Hi</span>'
 
 
 # ---------------------------------------------------------------------------

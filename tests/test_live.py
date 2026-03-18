@@ -13,7 +13,6 @@ from helldivepy.models import (
     Assignment,
     Campaign,
     Dispatch,
-    DispatchV2,
     Event,
     Planet,
     SpaceStation,
@@ -55,40 +54,19 @@ class TestLiveWarModule:
 
 
 @pytest.mark.live
-class TestLiveDispatchesModuleV1:
-    def test_get_all_returns_list(self, live_client: HelldiveAPIClient) -> None:
-        dispatches = live_client.dispatches_v1.get_all()
-        assert isinstance(dispatches, list)
-        for d in dispatches:
-            assert isinstance(d, Dispatch)
-
-    def test_get_first_by_index(self, live_client: HelldiveAPIClient) -> None:
-        dispatches = live_client.dispatches_v1.get_all()
-        if not dispatches:
-            pytest.skip("No dispatches available.")
-        first = live_client.dispatches_v1.get(dispatches[0].id)
-        assert isinstance(first, Dispatch)
-        assert first.id == dispatches[0].id
-
-    def test_get_nonexistent_returns_none(self, live_client: HelldiveAPIClient) -> None:
-        result = live_client.dispatches_v1.get(999999999)
-        assert result is None
-
-
-@pytest.mark.live
-class TestLiveDispatchesModuleV2:
+class TestLiveDispatchesModule:
     def test_get_all_returns_list(self, live_client: HelldiveAPIClient) -> None:
         dispatches = live_client.dispatches.get_all()
         assert isinstance(dispatches, list)
         for d in dispatches:
-            assert isinstance(d, DispatchV2)
+            assert isinstance(d, Dispatch)
 
     def test_get_first_by_index(self, live_client: HelldiveAPIClient) -> None:
         dispatches = live_client.dispatches.get_all()
         if not dispatches:
             pytest.skip("No dispatches available.")
         first = live_client.dispatches.get(dispatches[0].id)
-        assert isinstance(first, DispatchV2)
+        assert isinstance(first, Dispatch)
         assert first.id == dispatches[0].id
 
     def test_get_nonexistent_returns_none(self, live_client: HelldiveAPIClient) -> None:
@@ -203,27 +181,27 @@ class TestLiveCampaignModule:
 @pytest.mark.live
 class TestLiveSpaceStationsModule:
     def test_get_all_returns_list(self, live_client: HelldiveAPIClient) -> None:
-        stations = live_client.spacestations.get_all()
+        stations = live_client.space_stations.get_all()
         assert isinstance(stations, list)
         for s in stations:
             assert isinstance(s, SpaceStation)
 
     def test_get_first_by_id(self, live_client: HelldiveAPIClient) -> None:
-        stations = live_client.spacestations.get_all()
+        stations = live_client.space_stations.get_all()
         if not stations:
             pytest.skip("No space stations available.")
-        first = live_client.spacestations.get(stations[0].id32)
+        first = live_client.space_stations.get(stations[0].id32)
         assert isinstance(first, SpaceStation)
         assert first.id32 == stations[0].id32
 
     def test_get_nonexistent_returns_none(self, live_client: HelldiveAPIClient) -> None:
-        result = live_client.spacestations.get(999999999)
+        result = live_client.space_stations.get(999999999)
         assert result is None
 
     def test_spacestation_has_nested_planet(
         self, live_client: HelldiveAPIClient
     ) -> None:
-        stations = live_client.spacestations.get_all()
+        stations = live_client.space_stations.get_all()
         if not stations:
             pytest.skip("No space stations available.")
         for station in stations:

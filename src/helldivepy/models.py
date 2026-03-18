@@ -90,14 +90,6 @@ class Dispatch(APIModel):
     id: int
     published: str
     type: DispatchType
-    # <i=...>[message]</i>
-    message: HDMLString
-
-
-class DispatchV2(APIModel):
-    id: int
-    published: str
-    type: DispatchType
     # <span ah-data='...'>[message]</span>
     message: str
 

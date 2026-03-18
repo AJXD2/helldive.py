@@ -9,7 +9,6 @@ from helldivepy.models import (
     Assignment,
     Campaign,
     Dispatch,
-    DispatchV2,
     Event,
     Planet,
     SpaceStation,
@@ -63,83 +62,24 @@ class TestWarModule:
 
 
 # ---------------------------------------------------------------------------
-# DispatchesModuleV1
+# DispatchesModule
 # ---------------------------------------------------------------------------
 
 
-class TestDispatchesModuleV1:
+class TestDispatchesModule:
     def test_get_all_returns_list(
         self,
         client: HelldiveAPIClient,
         respx_mock: respx.MockRouter,
         raw_dispatch: dict,  # type: ignore[type-arg]
-    ) -> None:
-        respx_mock.get(f"{BASE_URL}/v1/dispatches").mock(
-            return_value=httpx.Response(200, json=[raw_dispatch])
-        )
-        result = client.dispatches_v1.get_all()
-        assert len(result) == 1
-        assert isinstance(result[0], Dispatch)
-        assert result[0].id == raw_dispatch["id"]
-
-    def test_get_all_empty_list(
-        self, client: HelldiveAPIClient, respx_mock: respx.MockRouter
-    ) -> None:
-        respx_mock.get(f"{BASE_URL}/v1/dispatches").mock(
-            return_value=httpx.Response(200, json=[])
-        )
-        assert client.dispatches_v1.get_all() == []
-
-    def test_get_returns_dispatch(
-        self,
-        client: HelldiveAPIClient,
-        respx_mock: respx.MockRouter,
-        raw_dispatch: dict,  # type: ignore[type-arg]
-    ) -> None:
-        respx_mock.get(f"{BASE_URL}/v1/dispatches/1").mock(
-            return_value=httpx.Response(200, json=raw_dispatch)
-        )
-        result = client.dispatches_v1.get(1)
-        assert isinstance(result, Dispatch)
-        assert result.id == 1
-
-    def test_get_returns_none_on_404(
-        self, client: HelldiveAPIClient, respx_mock: respx.MockRouter
-    ) -> None:
-        respx_mock.get(f"{BASE_URL}/v1/dispatches/999").mock(
-            return_value=httpx.Response(404)
-        )
-        assert client.dispatches_v1.get(999) is None
-
-    def test_get_reraises_non_404_errors(
-        self, client: HelldiveAPIClient, respx_mock: respx.MockRouter
-    ) -> None:
-        respx_mock.get(f"{BASE_URL}/v1/dispatches/1").mock(
-            return_value=httpx.Response(500)
-        )
-        with pytest.raises(httpx.HTTPStatusError):
-            client.dispatches_v1.get(1)
-
-
-# ---------------------------------------------------------------------------
-# DispatchesModuleV2
-# ---------------------------------------------------------------------------
-
-
-class TestDispatchesModuleV2:
-    def test_get_all_returns_list(
-        self,
-        client: HelldiveAPIClient,
-        respx_mock: respx.MockRouter,
-        raw_dispatch_v2: dict,  # type: ignore[type-arg]
     ) -> None:
         respx_mock.get(f"{BASE_URL}/v2/dispatches").mock(
-            return_value=httpx.Response(200, json=[raw_dispatch_v2])
+            return_value=httpx.Response(200, json=[raw_dispatch])
         )
         result = client.dispatches.get_all()
         assert len(result) == 1
-        assert isinstance(result[0], DispatchV2)
-        assert result[0].id == raw_dispatch_v2["id"]
+        assert isinstance(result[0], Dispatch)
+        assert result[0].id == raw_dispatch["id"]
 
     def test_get_all_empty_list(
         self, client: HelldiveAPIClient, respx_mock: respx.MockRouter
@@ -153,13 +93,13 @@ class TestDispatchesModuleV2:
         self,
         client: HelldiveAPIClient,
         respx_mock: respx.MockRouter,
-        raw_dispatch_v2: dict,  # type: ignore[type-arg]
+        raw_dispatch: dict,  # type: ignore[type-arg]
     ) -> None:
         respx_mock.get(f"{BASE_URL}/v2/dispatches/1").mock(
-            return_value=httpx.Response(200, json=raw_dispatch_v2)
+            return_value=httpx.Response(200, json=raw_dispatch)
         )
         result = client.dispatches.get(1)
-        assert isinstance(result, DispatchV2)
+        assert isinstance(result, Dispatch)
         assert result.id == 1
 
     def test_get_returns_none_on_404(
@@ -394,7 +334,7 @@ class TestSpaceStationsModule:
         respx_mock.get(f"{BASE_URL}/v2/space-stations").mock(
             return_value=httpx.Response(200, json=[raw_spacestation])
         )
-        result = client.spacestations.get_all()
+        result = client.space_stations.get_all()
         assert len(result) == 1
         assert isinstance(result[0], SpaceStation)
         assert result[0].id32 == 749875195
@@ -405,7 +345,7 @@ class TestSpaceStationsModule:
         respx_mock.get(f"{BASE_URL}/v2/space-stations").mock(
             return_value=httpx.Response(200, json=[])
         )
-        assert client.spacestations.get_all() == []
+        assert client.space_stations.get_all() == []
 
     def test_get_returns_spacestation(
         self,
@@ -416,7 +356,7 @@ class TestSpaceStationsModule:
         respx_mock.get(f"{BASE_URL}/v2/space-stations/749875195").mock(
             return_value=httpx.Response(200, json=raw_spacestation)
         )
-        result = client.spacestations.get(749875195)
+        result = client.space_stations.get(749875195)
         assert isinstance(result, SpaceStation)
         assert result.id32 == 749875195
 
@@ -426,7 +366,7 @@ class TestSpaceStationsModule:
         respx_mock.get(f"{BASE_URL}/v2/space-stations/999").mock(
             return_value=httpx.Response(404)
         )
-        assert client.spacestations.get(999) is None
+        assert client.space_stations.get(999) is None
 
     def test_get_reraises_non_404_errors(
         self, client: HelldiveAPIClient, respx_mock: respx.MockRouter
@@ -435,7 +375,7 @@ class TestSpaceStationsModule:
             return_value=httpx.Response(503)
         )
         with pytest.raises(httpx.HTTPStatusError):
-            client.spacestations.get(1)
+            client.space_stations.get(1)
 
 
 # ---------------------------------------------------------------------------

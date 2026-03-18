@@ -7,7 +7,7 @@ from helldivepy.modules import BaseModule
 # Modules
 from helldivepy.modules.assignments import AssignmentsModule
 from helldivepy.modules.campaigns import CampaignModule
-from helldivepy.modules.dispatches import DispatchesModuleV1, DispatchesModuleV2
+from helldivepy.modules.dispatches import DispatchesModule
 from helldivepy.modules.planets import PlanetModule
 from helldivepy.modules.space_stations import SpaceStationsModule
 from helldivepy.modules.steam import SteamModule
@@ -16,12 +16,11 @@ from helldivepy.modules.war import WarModule
 
 class HelldiveAPIClient:
     war: WarModule
-    dispatches: DispatchesModuleV2
-    dispatches_v1: DispatchesModuleV1
+    dispatches: DispatchesModule
     planets: PlanetModule
     assignments: AssignmentsModule
     campaigns: CampaignModule
-    spacestations: SpaceStationsModule
+    space_stations: SpaceStationsModule
     steam: SteamModule
 
     def __init__(
@@ -37,3 +36,9 @@ class HelldiveAPIClient:
         for attr, cls in get_type_hints(type(self)).items():
             if isinstance(cls, type) and issubclass(cls, BaseModule):
                 setattr(self, attr, cls(self))
+
+    def __enter__(self) -> "HelldiveAPIClient":
+        return self
+
+    def __exit__(self, *_: object) -> None:
+        self.client.close()
