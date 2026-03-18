@@ -237,3 +237,33 @@ class Assignment(APIModel):
         for i, task in enumerate(self.tasks):
             task.progress = self.progress[i] if i < len(self.progress) else 0
         return self
+
+
+class Cost(APIModel):
+    id: str
+    item_mix_id: int
+    target_value: int
+    current_value: float
+    delta_per_second: float
+    max_donation_ammount: int
+    max_donation_period_seconds: int
+
+
+class TacticalAction(APIModel):
+    id32: int
+    media_id32: int
+    name: str
+    description: str
+    strategic_description: str
+    status: int
+    status_expire: datetime
+    costs: list[Cost]
+    effect_ids: list[int]
+
+
+class SpaceStation(APIModel):
+    id32: int
+    planet: Planet
+    election_end: datetime
+    flags: int
+    tactical_actions: list[TacticalAction]
