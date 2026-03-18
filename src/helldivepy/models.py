@@ -201,10 +201,9 @@ class Task(APIModel):
     def is_liberation_task(self) -> bool:
         """Liberation/defense tasks track progress via Campaign health, not Assignment.progress."""  # noqa: E501
         return self.type in (
-            TaskType.SUCCEED_IN_DEFENSE,
-            TaskType.LIBERATE_PLANET,
-            TaskType.EARN_MEDALS,
-            TaskType.EXTRACT_WITH_ITEM,
+            TaskType.DEFENSE,
+            TaskType.LIBERATION,
+            TaskType.CONTROL,
             TaskType.COMPLETE_MISSIONS,
         )
 

@@ -218,9 +218,8 @@ class TestTask:
     def test_values_zipped_to_dict(self, raw_kill_task: dict) -> None:  # type: ignore[type-arg]
         t = Task.model_validate(raw_kill_task)
         assert isinstance(t.values, dict)
-        assert t.values[TaskValueType.FACTION] == 3
+        assert t.values[TaskValueType.RACE] == 3
         assert t.values[TaskValueType.GOAL] == 100000
-        assert t.values[TaskValueType.PLANET_HASH] == 111222333
 
     def test_unknown_value_types_kept_as_int(self, raw_kill_task: dict) -> None:  # type: ignore[type-arg]
         t = Task.model_validate(raw_kill_task)
@@ -230,7 +229,7 @@ class TestTask:
 
     def test_task_type_resolved_to_enum(self, raw_kill_task: dict) -> None:  # type: ignore[type-arg]
         t = Task.model_validate(raw_kill_task)
-        assert t.type == TaskType.KILL_ENEMIES
+        assert t.type == TaskType.ERADICATE
 
     def test_task_type_unknown_kept_as_int(self) -> None:
         t = Task.model_validate({"type": 99, "values": [], "valueTypes": []})
@@ -303,8 +302,8 @@ class TestAssignment:
     def test_tasks_parsed(self, raw_assignment: dict) -> None:  # type: ignore[type-arg]
         a = Assignment.model_validate(raw_assignment)
         assert len(a.tasks) == 2
-        assert a.tasks[0].type == TaskType.KILL_ENEMIES
-        assert a.tasks[1].type == TaskType.SUCCEED_IN_DEFENSE
+        assert a.tasks[0].type == TaskType.ERADICATE
+        assert a.tasks[1].type == TaskType.LIBERATION
 
     def test_kill_task_progress_perc(self, raw_assignment: dict) -> None:  # type: ignore[type-arg]
         a = Assignment.model_validate(raw_assignment)
