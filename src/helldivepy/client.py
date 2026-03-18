@@ -7,7 +7,7 @@ from helldivepy.modules import BaseModule
 # Modules
 from helldivepy.modules.assignments import AssignmentsModule
 from helldivepy.modules.campaigns import CampaignModule
-from helldivepy.modules.dispatches import DispatchesModule
+from helldivepy.modules.dispatches import DispatchesModuleV1, DispatchesModuleV2
 from helldivepy.modules.planets import PlanetModule
 from helldivepy.modules.space_stations import SpaceStationsModule
 from helldivepy.modules.war import WarModule
@@ -15,7 +15,8 @@ from helldivepy.modules.war import WarModule
 
 class HelldiveAPIClient:
     war: WarModule
-    dispatches: DispatchesModule
+    dispatches: DispatchesModuleV2
+    dispatches_v1: DispatchesModuleV1
     planets: PlanetModule
     assignments: AssignmentsModule
     campaigns: CampaignModule

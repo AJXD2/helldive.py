@@ -5,7 +5,7 @@ import httpx
 from helldivepy.client import HelldiveAPIClient
 from helldivepy.modules.assignments import AssignmentsModule
 from helldivepy.modules.campaigns import CampaignModule
-from helldivepy.modules.dispatches import DispatchesModule
+from helldivepy.modules.dispatches import DispatchesModuleV1, DispatchesModuleV2
 from helldivepy.modules.planets import PlanetModule
 from helldivepy.modules.war import WarModule
 
@@ -32,7 +32,8 @@ class TestHelldiveAPIClient:
     def test_all_modules_auto_registered(self) -> None:
         c = HelldiveAPIClient()
         assert isinstance(c.war, WarModule)
-        assert isinstance(c.dispatches, DispatchesModule)
+        assert isinstance(c.dispatches, DispatchesModuleV2)
+        assert isinstance(c.dispatches_v1, DispatchesModuleV1)
         assert isinstance(c.planets, PlanetModule)
         assert isinstance(c.assignments, AssignmentsModule)
         assert isinstance(c.campaigns, CampaignModule)

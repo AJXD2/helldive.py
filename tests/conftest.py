@@ -57,6 +57,13 @@ DISPATCH = {
     "message": "<i=1>Important alert</i>",
 }
 
+DISPATCH_V2 = {
+    "id": 1,
+    "published": "2026-03-10T12:00:00Z",
+    "type": 0,
+    "message": '<span data-ah="1">Important alert</span>',
+}
+
 REGION = {
     "id": 1,
     "hash": 123456,
@@ -219,6 +226,11 @@ def raw_war() -> dict:  # type: ignore[type-arg]
 @pytest.fixture
 def raw_dispatch() -> dict:  # type: ignore[type-arg]
     return copy.deepcopy(DISPATCH)
+
+
+@pytest.fixture
+def raw_dispatch_v2() -> dict:  # type: ignore[type-arg]
+    return copy.deepcopy(DISPATCH_V2)
 
 
 @pytest.fixture
