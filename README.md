@@ -111,6 +111,14 @@ uv run pyright
 
 ---
 
+## Thanks
+Thanks to the devs of the [Community API](https://github.com/helldivers-2/api) for keeping a well maintained and easy to use API.
+- [dealloc](https://github.com/dealloc) 
+- [lambstream](https://github.com/lambstream)
+- [TheWizardofGauze](https://github.com/TheWizardofGauze)
+
+---
+
 ## License
 
 MIT
