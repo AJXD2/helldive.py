@@ -23,6 +23,9 @@ uv run pytest
 # Run a single test
 uv run pytest tests/path/to/test_file.py::test_function_name
 
+# Run live API tests (requires network)
+uv run pytest --live
+
 # Build package
 uv build
 ```
@@ -82,3 +85,30 @@ The live API requires `X-Super-Client` and `X-Super-Contact` headers.
 - **Ruff** rules: E, F, I, UP, B, SIM
 - **Python 3.11+** required
 - Pre-commit hooks run ruff + pyright automatically
+
+## Testing
+
+All new code must have corresponding tests. Use the following conventions:
+
+### Test files
+
+| File | Covers |
+|---|---|
+| `tests/conftest.py` | Shared fixtures as raw API-shaped dicts (constants + `@pytest.fixture`) |
+| `tests/test_models.py` | Pydantic model parsing and validation |
+| `tests/test_enums.py` | Enum values, `from_int`/`from_str` construction, invalid value errors |
+| `tests/test_client.py` | `HelldiveAPIClient` initialization, auto-registration, headers, URL helpers |
+| `tests/test_modules.py` | Module HTTP methods using `respx_mock` (success, 404 → None, non-404 re-raises) |
+| `tests/test_live.py` | Real HTTP calls against the live API; skipped by default, run with `--live` |
+
+### Rules
+
+- **New model** → add fixtures to `conftest.py` and tests to `test_models.py`.
+- **New enum** → add tests to `test_enums.py` (every member value + round-trip from int/str).
+- **New module** → add fixtures to `conftest.py` and tests to `test_modules.py`:
+  - `get_all()` — success (non-empty list), empty list.
+  - `get(index)` — success, 404 returns `None`, non-404 re-raises `httpx.HTTPStatusError`.
+  - `get_events()` (or other extras) — success and empty list.
+- **HTTP mocking** — always use `respx_mock` pytest fixture (provided by `respx`); never make real network calls in tests.
+- **Fixture data** — define constants at module level in `conftest.py`, deep-copy in the fixture function.
+- **Live tests** — add to `test_live.py` with `@pytest.mark.live`; use `scope="module"` client fixture; call `pytest.skip()` if the endpoint returns an empty list instead of asserting on length.

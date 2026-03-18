@@ -53,6 +53,7 @@ venv = ".venv"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = ["live: make real HTTP calls to the Helldivers 2 API (deselected by default, use --live to enable)"]
 
 [dependency-groups]
 dev = [
