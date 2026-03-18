@@ -45,10 +45,9 @@ for d in dispatches[:3]:
 |---|---|---|
 | `client.war` | ✅ Done | `get() -> War` |
 | `client.dispatches` | ✅ Done | `get_all() -> list[Dispatch]`, `get(index) -> Dispatch \| None` |
-| `client.planets` | 🔜 Planned | `get_all() -> list[Planet]`, `get(index) -> Planet` |
+| `client.planets` | ✅ Done | `get_all() -> list[Planet]`, `get(index) -> Planet` |
 | `client.campaigns` | 🔜 Planned | `get_all() -> list[Campaign]`, `get(index) -> Campaign` |
-| `client.assignments` | 🔜 Planned | `get_all() -> list[Assignment]`, `get(index) -> Assignment` |
-| `client.planet_events` | 🔜 Planned | `get_all() -> list[Event]` |
+| `client.assignments` | ✅ Done | `get_all() -> list[Assignment]`, `get(index) -> Assignment` |
 | `client.space_stations` | 🔜 Planned | `get_all() -> list[SpaceStation]`, `get(index) -> SpaceStation` |
 | `client.steam` | 🔜 Planned | `get_all() -> list[SteamNews]`, `get(gid) -> SteamNews` |
 
