@@ -1,114 +1,120 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code when working with this repository.
 
 ## Commands
 
 ```bash
-# Install dependencies
-uv sync
-
-# Lint
-uv run ruff check .
-
-# Format
-uv run ruff format .
-
-# Type check
-uv run pyright
-
-# Run tests
-uv run pytest
-
-# Run a single test
-uv run pytest tests/path/to/test_file.py::test_function_name
-
-# Run live API tests (requires network)
-uv run pytest --live
-
-# Build package
-uv build
+uv sync                                                      # install dependencies
+uv run ruff check .                                          # lint
+uv run ruff format .                                         # format
+uv run pyright                                               # type check (strict)
+uv run pytest                                                # run tests
+uv run pytest tests/path/to/test_file.py::test_name         # run single test
+uv run pytest --live                                         # run live API tests (needs network)
+uv build                                                     # build package
+uv run mkdocs serve                                          # preview docs locally
+uv run mkdocs gh-deploy                                      # deploy docs to GitHub Pages
 ```
 
 ## Architecture
 
-**helldive.py** is a Python client library for the Helldivers 2 API (`https://api.helldivers2.dev/api`).
+**helldive.py** is a typed Python client for the Helldivers 2 community API (`https://api.helldivers2.dev/api`).
 
-### Module Registration
-
-`HelldiveAPIClient` auto-registers submodules by inspecting its own type annotations. Any attribute typed as a `BaseModule` subclass is automatically instantiated and bound to the client — no manual registration required. This means adding a new module only requires declaring it as a type-annotated attribute on the client.
-
-### Request Flow
+### Request flow
 
 ```
-HelldiveAPIClient → ModuleX (e.g. DispatchesModule) → BaseModule._get() → httpx → Pydantic model
+HelldiveAPIClient → ModuleX → BaseModule._get() → httpx → Pydantic model
 ```
 
-`BaseModule` provides `_url()` and `_get()` helpers. All modules inherit from it and live in `src/helldivepy/modules/`.
+`BaseModule` (`modules/__init__.py`) provides `_url(path)` and `_get(path, **kwargs)`. Every module inherits it and lives in `src/helldivepy/modules/`.
 
-### Data Models
+### Module auto-registration
 
-All models extend `APIModel` (in `models.py`), which configures Pydantic with automatic camelCase ↔ snake_case alias generation. This handles JSON deserialization from the API transparently.
+`HelldiveAPIClient` inspects its own type hints at `__init__` time and instantiates every attribute typed as a `BaseModule` subclass. **No manual registration needed** — declaring a type-annotated attribute on the client is sufficient.
 
-`HDMLString` is a custom type wrapping the game's HDML markup language, with `to_md()` for converting to Markdown.
+### Modules
 
+| Attribute | Class | Endpoints | Notes |
+|---|---|---|---|
+| `war` | `WarModule` | `/v1/war` | `get()` only, no `get_all()` |
+| `dispatches` | `DispatchesModule` | `/v2/dispatches` | — |
+| `planets` | `PlanetModule` | `/v1/planets` | `get_events() -> list[Event]` |
+| `campaigns` | `CampaignModule` | `/v1/campaigns` | — |
+| `assignments` | `AssignmentsModule` | `/v1/assignments` | — |
+| `space_stations` | `SpaceStationsModule` | `/v2/space-stations` | — |
+| `steam` | `SteamModule` | `/v1/steam` | `get(gid: str)` takes a string ID |
+
+All modules: `get_all() -> list[T]`, `get(index) -> T | None` (returns `None` on 404, re-raises everything else).
+
+### Data models
+
+All models extend `APIModel` (`models.py`), which configures Pydantic with:
+- `alias_generator=to_camel` — automatic camelCase ↔ snake_case aliasing
+- `populate_by_name=True` — accepts both forms as input
+
+The API returns HTML span markup in text fields (`<span data-ah="1">text</span>`). These are plain `str` fields — there is no custom markup type.
 
 #### Task parsing
 
-`Task.values` is parsed from the raw parallel `values`/`valueTypes` arrays into `dict[TaskValueType | int, int]` keyed by `TaskValueType` where known. Unknown value type codes are kept as raw `int`.
+`Task.zip_values` (before-validator) zips the raw parallel `values`/`valueTypes` arrays into `dict[TaskValueType | int, int]`. Unknown type codes stay as raw `int`.
 
-`Assignment.inject_task_progress` injects each task's progress from `Assignment.progress[i]` during validation, enabling `Task.progress_perc` and `Task.goal`.
+`Assignment.inject_task_progress` (after-validator) distributes `Assignment.progress[i]` into each `Task.progress`, enabling `Task.progress_perc` and `Task.goal`.
 
 #### Community-reverse-engineered enums
 
-`TaskType` and `TaskValueType` in `enums.py` are based on community research and may be incomplete. Unknown task types fall back to raw `int`.
+`TaskType`, `TaskValueType`, and `CampaignType` in `enums.py` are based on community research and are **incomplete**. Unknown integer codes fall back to raw `int` rather than raising.
 
-### API endpoints 
+### API headers
 
-The live API requires `X-Super-Client` and `X-Super-Contact` headers.
+Every request requires:
+- `X-Super-Client` — your application name
+- `X-Super-Contact` — contact info (URL or email)
 
-### Key Files
-
-| File | Purpose |
-|---|---|
-| `src/helldivepy/client.py` | `HelldiveAPIClient` — main entry point, auto-registers modules |
-| `src/helldivepy/modules/__init__.py` | `BaseModule` abstract base |
-| `src/helldivepy/modules/[module_name].py` | Specific module implementation |
-| `src/helldivepy/models.py` | All Pydantic models + `HDMLString` |
-| `src/helldivepy/enums.py` | Game enumerations |
-| `tests/conftest.py` | Shared pytest fixtures (raw API-shaped dicts) |
-| `tests/test_models.py` | Model parsing and validation tests |
-
-### Tooling
-
-- **Pyright** in strict mode — all types must be fully annotated
-- **Ruff** rules: E, F, I, UP, B, SIM
-- **Python 3.11+** required
-- Pre-commit hooks run ruff + pyright automatically
+Rate limit: **5 requests per 10 seconds**.
 
 ## Testing
 
-All new code must have corresponding tests. Use the following conventions:
-
-### Test files
+### Files
 
 | File | Covers |
 |---|---|
-| `tests/conftest.py` | Shared fixtures as raw API-shaped dicts (constants + `@pytest.fixture`) |
-| `tests/test_models.py` | Pydantic model parsing and validation |
-| `tests/test_enums.py` | Enum values, `from_int`/`from_str` construction, invalid value errors |
-| `tests/test_client.py` | `HelldiveAPIClient` initialization, auto-registration, headers, URL helpers |
-| `tests/test_modules.py` | Module HTTP methods using `respx_mock` (success, 404 → None, non-404 re-raises) |
-| `tests/test_live.py` | Real HTTP calls against the live API; skipped by default, run with `--live` |
+| `tests/conftest.py` | Module-level constants + `@pytest.fixture` functions (all deep-copied) |
+| `tests/test_models.py` | Pydantic model parsing, camelCase aliasing, nullable fields, validators |
+| `tests/test_enums.py` | Every member value, round-trip from int/str, invalid value errors |
+| `tests/test_client.py` | Initialization, auto-registration, headers, context manager |
+| `tests/test_modules.py` | HTTP methods via `respx_mock` |
+| `tests/test_live.py` | Real network calls; skipped by default, run with `--live` |
 
 ### Rules
 
-- **New model** → add fixtures to `conftest.py` and tests to `test_models.py`.
-- **New enum** → add tests to `test_enums.py` (every member value + round-trip from int/str).
-- **New module** → add fixtures to `conftest.py` and tests to `test_modules.py`:
-  - `get_all()` — success (non-empty list), empty list.
-  - `get(index)` — success, 404 returns `None`, non-404 re-raises `httpx.HTTPStatusError`.
-  - `get_events()` (or other extras) — success and empty list.
-- **HTTP mocking** — always use `respx_mock` pytest fixture (provided by `respx`); never make real network calls in tests.
-- **Fixture data** — define constants at module level in `conftest.py`, deep-copy in the fixture function.
-- **Live tests** — add to `test_live.py` with `@pytest.mark.live`; use `scope="module"` client fixture; call `pytest.skip()` if the endpoint returns an empty list instead of asserting on length.
+- **New model** → add constant + fixture to `conftest.py`; add tests to `test_models.py`.
+- **New enum** → add tests to `test_enums.py` covering every member and round-trip from int/str.
+- **New module** → add fixture to `conftest.py`; add tests to `test_modules.py`:
+  - `get_all()` — non-empty list, empty list.
+  - `get(index)` — success, 404 → `None`, non-404 re-raises `httpx.HTTPStatusError`.
+  - Any extra methods (`get_events()`, etc.) — success and empty list.
+- **HTTP mocking** — always use the `respx_mock` pytest fixture; never make real network calls in unit tests.
+- **Fixture data** — define as module-level constants in `conftest.py`; `copy.deepcopy` in the fixture function.
+- **Live tests** — add to `test_live.py` with `@pytest.mark.live`; use a `scope="module"` client fixture; call `pytest.skip()` if the endpoint returns an empty list.
+
+## Tooling
+
+- **Pyright** strict mode — all types must be fully annotated.
+- **Ruff** rules: E, F, I, UP, B, SIM — line length 88.
+- **Pre-commit** runs ruff + pyright on every commit.
+- **Python 3.11+** required.
+
+## Key files
+
+| File | Purpose |
+|---|---|
+| `src/helldivepy/client.py` | `HelldiveAPIClient` — entry point, auto-registers modules |
+| `src/helldivepy/modules/__init__.py` | `BaseModule` abstract base |
+| `src/helldivepy/modules/<name>.py` | Module implementations |
+| `src/helldivepy/models.py` | All Pydantic models |
+| `src/helldivepy/enums.py` | Game enumerations |
+| `tests/conftest.py` | Shared fixtures |
+| `docs/api/` | MkDocs API reference pages |
+| `.github/workflows/ci.yml` | Lint, typecheck, test on Python 3.11/3.12/3.13 |
+| `.github/workflows/docs.yml` | Deploy docs to GitHub Pages on push to main |

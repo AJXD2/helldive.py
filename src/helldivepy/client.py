@@ -29,6 +29,15 @@ class HelldiveAPIClient:
         contact: str = "github:ajxd2/helldive.py",
         base_url: str = "https://api.helldivers2.dev/api",
     ):
+        """Create a new API client.
+
+        Args:
+            client: Your application name, sent as `X-Super-Client`. Identifies your
+                app to the API operators.
+            contact: Contact info for your app, sent as `X-Super-Contact`. Typically
+                a GitHub URL or email address.
+            base_url: API base URL. Override for testing or alternative deployments.
+        """
         self.base_url = base_url
         self.headers = {"X-Super-Client": client, "X-Super-Contact": contact}
         self.client = httpx.Client()

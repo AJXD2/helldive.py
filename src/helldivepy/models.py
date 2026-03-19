@@ -17,6 +17,8 @@ from helldivepy.enums import (
 # Convert snake_case to camelCase for JSON serialization.
 # This removes adding an extra step to the request methods while enforcing standards.
 class APIModel(BaseModel):
+    """Base model for all API responses. Handles camelCase ↔ snake_case aliasing."""
+
     model_config = ConfigDict(
         alias_generator=to_camel,
         populate_by_name=True,
@@ -59,123 +61,204 @@ class HDMLString:
 
 
 class Statistics(APIModel):
+    """Contains statistics of missions, kills, success rate etc."""
+
     missions_won: int
     missions_lost: int
     mission_time: int
+    """Total planetside time in seconds."""
     terminid_kills: int
     automaton_kills: int
     illuminate_kills: int
     bullets_fired: int
+    """Total rounds discharged."""
     bullets_hit: int
+    """Total rounds on target."""
     time_played: int
+    """Total playtime including off-planet in seconds."""
     deaths: int
+    """Human casualties."""
     revives: int
     friendlies: int
+    """Friendly fire casualties."""
     mission_success_rate: float
     accuracy: float
+    """Average marksmanship percentage."""
     player_count: int
+    """Current active participants."""
 
 
 class War(APIModel):
+    """Global information of the ongoing war."""
+
     started: datetime
     ended: datetime
     now: datetime
+    """Snapshot timestamp."""
     client_version: str
+    """Minimum game version required."""
     factions: list[str]
+    """Participating factions."""
     impact_multiplier: float
+    """Mission impact calculation factor."""
     statistics: Statistics
+    """Aggregated warfare metrics."""
 
 
 class Dispatch(APIModel):
+    """Communications from high command regarding war status updates."""
+
     id: int
-    published: str
+    published: datetime
     type: DispatchType
-    # <span ah-data='...'>[message]</span>
+    """Dispatch category."""
     message: str
+    """
+    Dispatch content. Contains HTML span markup: <span data-ah='...'>[text]</span>.
+    """
 
 
 class Region(APIModel):
+    """Planetary subdivision. Some fields may be absent when the region is inactive."""
+
     id: int
     hash: int
+    """ArrowHead internal hash."""
     name: str | None = None
     description: str | None = None
     health: int | None = None
+    """Current durability."""
     max_health: int
+    """Maximum durability capacity."""
     size: RegionSize
+    """Settlement/Town/City/MegaCity classification."""
     regen_per_second: float | None = None
-    # Unknown purpose
+    """Autonomous regeneration rate."""
     availability_factor: float | None = None
+    """Operational parameter (unknown purpose)."""
     is_available: bool
+    """Whether the region is currently playable."""
     players: int
+    """Active combatants in this region."""
 
 
 class Biome(APIModel):
+    """Environmental classification system for planetary surfaces."""
+
     name: str
     description: str
 
 
 class Hazard(APIModel):
+    """Environmental threat present on a planet."""
+
     name: str
     description: str
 
 
 class Position(APIModel):
+    """Coordinate on the galactic war map."""
+
     x: float
+    """Horizontal coordinate."""
     y: float
+    """Vertical coordinate."""
 
 
 class Event(APIModel):
+    """Active planetary occurrence with temporal boundaries (e.g. a defense event)."""
+
     id: int
     event_type: int
+    """Occurrence category."""
     faction: Factions
+    """Initiating faction."""
     health: int
+    """Current durability snapshot."""
     max_health: int
+    """Peak durability capacity."""
     start_time: datetime
     end_time: datetime
     campaign_id: int
+    """Associated campaign reference."""
     joint_operation_ids: list[int]
+    """Connected operation references."""
 
 
 class Planet(APIModel):
+    """Comprehensive planetary data integrating all available information."""
+
     index: int
+    """ArrowHead planet identifier."""
     name: str
     sector: str
+    """Geographic sector classification."""
     biome: Biome
     hazards: list[Hazard]
     hash: int
+    """ArrowHead internal identifier."""
     position: Position
+    """Map coordinates."""
     waypoints: list[int]
+    """Connected planet indices."""
     max_health: int
+    """Liberation capacity."""
     health: int
+    """Current liberation status."""
     disabled: bool
+    """Whether the planet is currently inactive."""
     initial_owner: Factions
     current_owner: Factions
     regen_per_second: float
+    """Uncontested enemy regeneration rate."""
     event: Event | None = None
+    """Active occurrence, if any."""
     statistics: Statistics
+    """Planetary warfare metrics."""
     attacking: list[int]
+    """Target planet indices this planet is attacking."""
     regions: list[Region]
+    """Subdivisions with individual health and availability status."""
 
 
 class Campaign(APIModel):
+    """Ongoing planetary warfare operation."""
+
     id: int
     planet: Planet
+    """Theater of operations."""
     type: CampaignType
+    """Operation classification."""
     count: int
+    """Historical occurrence count for this planet."""
     faction: Factions
+    """Enemy faction being fought."""
 
 
 class HomeWorld(APIModel):
+    """Factional territorial origins."""
+
     race: int
+    """Faction identifier."""
     planet_indices: list[int]
+    """Possessed world identifiers."""
 
 
 class Task(APIModel):
+    """Constituent objective within an assignment requiring completion.
+
+    Note: `type` and the keys of `values` are community-reverse-engineered
+    (TaskType, TaskValueType) and may be incomplete. Unknown values fall back to int.
+    """
+
     type: TaskType | int
-    # valueType → value, keyed by TaskValueType where known
+    """Objective classification (community-reverse-engineered, may be incomplete)."""
     values: dict[TaskValueType | int, int]
-    # Raw progress value injected by Assignment during validation
+    """
+    Parsed valueType → value mapping. Keys are TaskValueType where known, else raw int.
+    """
     progress: int = 0
+    """Raw progress value injected by Assignment during validation."""
 
     @model_validator(mode="before")
     @classmethod
@@ -217,18 +300,26 @@ class Task(APIModel):
 
 
 class Reward(APIModel):
+    """Completion incentive for an assignment."""
+
     type: int
+    """Reward classification (medals, credits, etc.)."""
     amount: int
+    """Compensation quantity."""
 
 
 class Assignment(APIModel):
+    """Directive issued to Helldivers by high command (a.k.a. Major Order)."""
+
     id: int
     progress: list[int]
+    """Per-task advancement values; injected into each Task during validation."""
     title: str
     briefing: str
     description: str | None = None
     tasks: list[Task]
     reward: Reward | None = None
+    """Primary reward (deprecated in favour of rewards)."""
     rewards: list[Reward]
     expiration: datetime
     flags: int
@@ -241,36 +332,63 @@ class Assignment(APIModel):
 
 
 class Cost(APIModel):
+    """Resource requirement for activating a tactical action."""
+
     id: str
     item_mix_id: int
+    """Resource classification identifier."""
     target_value: int
+    """Required accumulation to activate the action."""
     current_value: float
+    """Present accumulation."""
     delta_per_second: float
+    """Accumulation rate."""
     max_donation_ammount: int
+    """Individual contribution ceiling. Note: 'ammount' is an upstream API typo."""
     max_donation_period_seconds: int
+    """Contribution window duration in seconds."""
 
 
 class TacticalAction(APIModel):
+    """Strategic capability deployable by a space station."""
+
     id32: int
+    """Action identifier (32-bit ArrowHead ID)."""
     media_id32: int
+    """Associated media asset reference."""
     name: str
     description: str
+    """Functional overview of the action."""
     strategic_description: str
+    """Military context and in-game effects."""
     status: int
+    """Current operational state."""
     status_expire: datetime
+    """Timestamp when the current status transitions."""
     costs: list[Cost]
+    """Resource expenditures required to activate."""
     effect_ids: list[int]
+    """References to gameplay consequence definitions."""
 
 
 class SpaceStation(APIModel):
+    """Orbital democracy platform supporting humanity's war effort."""
+
     id32: int
+    """Station identifier (32-bit ArrowHead ID)."""
     planet: Planet
+    """Planet the station is currently orbiting."""
     election_end: datetime
+    """Timestamp when the next destination vote concludes."""
     flags: int
+    """Configuration parameters."""
     tactical_actions: list[TacticalAction]
+    """Available operations that Helldivers can collectively fund and activate."""
 
 
 class SteamNews(APIModel):
+    """Steam news article associated with the game."""
+
     id: str
     title: str
     url: str

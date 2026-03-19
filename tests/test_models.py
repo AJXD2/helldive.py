@@ -60,13 +60,14 @@ class TestHDMLString:
         d = Dispatch.model_validate(
             {
                 "id": 1,
-                "published": "2026-01-01",
+                "published": "2026-01-01T00:00:00Z",
                 "type": 0,
                 "message": '<span data-ah="1">Hi</span>',
             }
         )
         assert isinstance(d.message, str)
         assert d.message == '<span data-ah="1">Hi</span>'
+        assert isinstance(d.published, datetime)
 
 
 # ---------------------------------------------------------------------------

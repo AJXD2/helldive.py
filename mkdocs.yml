@@ -1,0 +1,104 @@
+site_name: helldive.py
+site_description: A Python client library for the Helldivers 2 API
+site_url: https://ajxd2.github.io/helldive.py
+repo_url: https://github.com/ajxd2/helldive.py
+repo_name: ajxd2/helldive.py
+site_author: Anthony Kovach
+copyright: Copyright &copy; 2025 Anthony Kovach
+
+theme:
+  name: material
+  logo: assets/favicon.png
+  favicon: assets/favicon.png
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: amber
+      accent: orange
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: amber
+      accent: orange
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - navigation.expand
+    - navigation.footer
+    - content.code.copy
+    - content.code.annotate
+    - content.tooltips
+    - search.highlight
+    - search.suggest
+    - search.share
+    - toc.follow
+
+markdown_extensions:
+  - admonition # note/warning/tip callout blocks
+  - pymdownx.details # collapsible admonitions
+  - pymdownx.superfences: # fenced code blocks + diagrams
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite # inline `code` highlighting
+  - pymdownx.tabbed: # tabbed content blocks
+      alternate_style: true
+  - pymdownx.snippets # include external file snippets
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true # anchor links on headings
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: false
+            show_root_heading: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            docstring_style: google
+            members_order: source
+            show_signature_annotations: true
+            separate_signature: true
+            merge_init_into_class: true # cleaner class docs
+            show_if_no_docstring: false # hide undocumented members
+            filters:
+              - "!^_" # exclude private members by default
+            group_by_category: true
+            show_category_heading: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ajxd2/helldive.py
+      name: helldive.py on GitHub
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/helldive.py
+      name: helldive.py on PyPI
+
+nav:
+  - Home: index.md
+  - API Reference:
+      - Client: api/client.md
+      - Modules: api/modules.md
+      - Models: api/models.md
+      - Enums: api/enums.md
