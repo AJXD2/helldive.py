@@ -1,46 +1,66 @@
 [project]
 name = "helldivepy"
-version = "0.1.1"
-description = "A Helldivers 2 API wrapper using the Diveharder API and the Helldivers Community API"
-authors = [
-    {name = "AJXD2", email = "aj@ajxd2.dev"}
-]
-license = {text = "MIT"}
+version = "1.0.0"
+description = "A Helldivers 2 API wrapper"
 readme = "README.md"
-keywords = ["helldivers 2", "api", "wrapper", "diveharder", "community"]
+license = { text = "MIT" }
+authors = [
+    { name = "Anthony Kovach", email = "aj@ajxd2.dev" }
+]
+keywords = ["helldivers 2", "api", "wrapper"]
 classifiers = [
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3.11",
-    "Topic :: Games/Entertainment",
-    "Topic :: System :: Networking",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: OS Independent",
     "Typing :: Typed",
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "requests>=2.32.3",
-    "fire>=0.7.0",
-    "rich>=13.9.4,<15.0.0",
-    "pydantic>=2.10.3,<3.0.0",
+    "httpx>=0.28.1",
+    "pydantic>=2.0.0,<3.0.0",
 ]
 
 [project.optional-dependencies]
-dev = [
-    "black>=25.1.0",
-    "flake8>=7.1.1",
-]
 docs = [
-    "mkdocs>=1.6.1",
-    "mkdocstrings[python]>=0.27,<1.1",
-    "mkdocs-material>=9.5.49",
-    "pygments>=2.18.0",
-    "pymdown-extensions>=10.12",
+    "mkdocs-material>=9.0.0",
+    "mkdocstrings[python]>=0.27.0",
 ]
-
-[project.urls]
-Homepage = "https://github.com/ajxd2/helldive.py"
-Repository = "https://github.com/ajxd2/helldive.py"
-Documentation = "https://helldivepy.ajxd2.dev"
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.10.8,<0.11.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["helldivepy"]
+
+[tool.pyright]
+pythonVersion = "3.11"
+typeCheckingMode = "strict"
+venvPath = "."
+venv = ".venv"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["live: make real HTTP calls to the Helldivers 2 API (deselected by default, use --live to enable)"]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.5.1",
+    "pyright>=1.1.408",
+    "pytest>=9.0.2",
+    "respx>=0.22.0",
+    "rich>=14.3.3",
+    "ruff>=0.15.5",
+]

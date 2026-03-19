@@ -164,3 +164,7 @@ cython_debug/
 *.env
 # End of https://www.toptal.com/developers/gitignore/api/python
 main.py
+# Local claude config override
+.claude/settings.local.json
+# TODO: Remove before v1.0.0
+tmp/*
