@@ -1,6 +1,6 @@
 [project]
 name = "helldivepy"
-version = "0.1.0"
+version = "1.0.0"
 description = "A Helldivers 2 API wrapper"
 readme = "README.md"
 license = { text = "MIT" }
