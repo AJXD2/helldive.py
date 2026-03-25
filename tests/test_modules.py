@@ -9,7 +9,6 @@ from helldivepy.models import (
     Assignment,
     Campaign,
     Dispatch,
-    Event,
     Planet,
     SpaceStation,
     SteamNews,
@@ -182,15 +181,16 @@ class TestPlanetModule:
         self,
         client: HelldiveAPIClient,
         respx_mock: respx.MockRouter,
-        raw_event: dict,  # type: ignore[type-arg]
+        raw_planet_with_event: dict,  # type: ignore[type-arg]
     ) -> None:
         respx_mock.get(f"{BASE_URL}/v1/planet-events").mock(
-            return_value=httpx.Response(200, json=[raw_event])
+            return_value=httpx.Response(200, json=[raw_planet_with_event])
         )
         result = client.planets.get_events()
         assert len(result) == 1
-        assert isinstance(result[0], Event)
-        assert result[0].id == 99
+        assert isinstance(result[0], Planet)
+        assert result[0].event
+        assert result[0].event.id == 99
 
     def test_get_events_empty_list(
         self, client: HelldiveAPIClient, respx_mock: respx.MockRouter

@@ -1,6 +1,6 @@
 import httpx
 
-from helldivepy.models import Event, Planet
+from helldivepy.models import Planet
 from helldivepy.modules import BaseModule
 
 
@@ -31,10 +31,10 @@ class PlanetModule(BaseModule):
                 return None
             raise
 
-    def get_events(self) -> list[Event]:
+    def get_events(self) -> list[Planet]:
         """Fetch all planets with an active event (e.g. defense campaigns).
 
         Returns:
             A list of active Events across all planets.
         """
-        return [Event.model_validate(e) for e in self._get("/v1/planet-events")]
+        return [Planet.model_validate(e) for e in self._get("/v1/planet-events")]
